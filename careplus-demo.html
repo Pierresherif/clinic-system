@@ -1,0 +1,1401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>CarePlus Medical Clinic</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Inter:wght@400;500;600&family=Cairo:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0F2E2C; --teal:#1B6F6A; --teal-d:#12514D; --mint:#E4F0EC; --paper:#F6F9F7;
+  --line:#D3E2DD; --muted:#5C7572; --amber:#C9871F; --rose:#B04A46; --white:#fff;
+  --bg:var(--paper); --card:var(--white); --text:var(--ink);
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;font-size:16px;line-height:1.55}
+h1,h2,h3,.brand{font-family:"Bricolage Grotesque",Inter,sans-serif;font-weight:700;letter-spacing:-.02em;line-height:1.12;margin:0}
+h1{font-size:clamp(2rem,5vw,3.2rem)}
+h2{font-size:clamp(1.4rem,3vw,2rem)}
+h3{font-size:1.05rem}
+p{margin:0}
+a{color:inherit}
+img{max-width:100%}
+button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
+:focus-visible{outline:3px solid var(--teal);outline-offset:2px;border-radius:4px}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+/* header */
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:rgba(246,249,247,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.bar{display:flex;align-items:center;gap:16px;height:64px}
+.brand{display:flex;align-items:center;gap:10px;font-size:1.1rem}
+.logo{width:32px;height:32px;border-radius:10px;background:var(--teal);color:#fff;display:grid;place-items:center;font-weight:700;font-size:.9rem}
+nav{margin-left:auto;display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+nav button{padding:8px 12px;border-radius:8px;color:var(--muted);font-size:.92rem}
+nav button:hover{background:var(--mint);color:var(--ink)}
+.btn{background:var(--teal);color:#fff;padding:11px 20px;border-radius:10px;font-weight:600;display:inline-block}
+.btn:hover{background:var(--teal-d)}
+.btn.ghost{background:transparent;color:var(--teal);border:1px solid var(--line)}
+.btn.ghost:hover{background:var(--mint)}
+.btn[disabled]{opacity:.45;cursor:not-allowed}
+.btn.sm{padding:7px 12px;font-size:.85rem;border-radius:8px}
+/* hero */
+.hero{padding:72px 0 56px;display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:center}
+.hero p.lede{color:var(--muted);margin-top:18px;max-width:52ch;font-size:1.05rem}
+.hero .cta{margin-top:28px;display:flex;gap:12px;flex-wrap:wrap}
+.hours{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px}
+.hours div{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px dashed var(--line);font-size:.93rem}
+.hours div:last-child{border:0}
+.hours span:last-child{color:var(--muted)}
+section.block{padding:44px 0;border-top:1px solid var(--line)}
+.sub{color:var(--muted);margin-top:8px}
+.grid{display:grid;gap:16px;margin-top:24px}
+.g3{grid-template-columns:repeat(3,1fr)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px;text-align:left}
+.card .dot{width:38px;height:38px;border-radius:12px;background:var(--mint);color:var(--teal-d);display:grid;place-items:center;font-size:1.1rem;margin-bottom:12px}
+.card p{color:var(--muted);font-size:.92rem;margin-top:6px}
+.doc{display:flex;gap:14px;align-items:flex-start}
+.ava{width:54px;height:54px;border-radius:14px;background:var(--mint);color:var(--teal-d);display:grid;place-items:center;font-weight:700;flex:none;overflow:hidden}
+.ava svg{width:100%;height:100%;display:block}
+.photo{width:100%;aspect-ratio:4/3;border-radius:14px;overflow:hidden;background:var(--mint);margin-bottom:14px}
+.photo svg{width:100%;height:100%;display:block}
+.logo svg{width:22px;height:22px;display:block}
+.hero-art{width:100%;border-radius:18px;overflow:hidden;border:1px solid var(--line);background:var(--mint)}
+.hero-art svg{width:100%;height:auto;display:block}
+.map{border:1px solid var(--line);border-radius:16px;overflow:hidden;background:var(--mint)}
+.map svg{width:100%;height:auto;display:block}
+.dot svg{width:20px;height:20px;display:block}
+.tag{display:inline-block;background:var(--mint);color:var(--teal-d);border-radius:999px;padding:3px 10px;font-size:.78rem;font-weight:600}
+.fee{font-weight:600;margin-top:10px;font-size:.92rem}
+/* booking */
+.steps{display:flex;gap:8px;flex-wrap:wrap;margin:26px 0 8px}
+.steps li{list-style:none;font-size:.78rem;color:var(--muted);border:1px solid var(--line);padding:5px 11px;border-radius:999px;background:var(--card)}
+.steps li.on{background:var(--teal);color:#fff;border-color:var(--teal)}
+.steps li.done{background:var(--mint);color:var(--teal-d);border-color:var(--mint)}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:24px;margin-top:16px}
+.pick{width:100%;text-align:left;border:1px solid var(--line);border-radius:12px;padding:14px 16px;background:var(--card);margin-bottom:10px;display:flex;gap:12px;align-items:center}
+.pick:hover{border-color:var(--teal);background:var(--mint)}
+.pick.sel{border-color:var(--teal);box-shadow:inset 0 0 0 1px var(--teal)}
+.dates{display:flex;gap:10px;overflow-x:auto;padding-bottom:6px}
+.date{flex:none;width:84px;text-align:center;border:1px solid var(--line);border-radius:12px;padding:12px 6px;background:var(--card)}
+.date b{display:block;font-size:1.3rem;font-family:"Bricolage Grotesque",sans-serif}
+.date small{color:var(--muted)}
+.date.sel{background:var(--teal);color:#fff;border-color:var(--teal)}
+.date.sel small{color:#dff0ec}
+.slots{display:grid;grid-template-columns:repeat(auto-fill,minmax(112px,1fr));gap:10px}
+.slot{border:1px solid var(--line);border-radius:10px;padding:11px 6px;text-align:center;background:var(--card);font-size:.92rem}
+.slot:hover:not([disabled]){border-color:var(--teal)}
+.slot.sel{background:var(--teal);color:#fff;border-color:var(--teal)}
+.slot[disabled]{background:#EEF1F0;color:#93A6A3;text-decoration:line-through;cursor:not-allowed}
+label{display:block;font-size:.85rem;font-weight:600;margin:14px 0 6px}
+input,select{width:100%;padding:11px 13px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--text);font:inherit}
+.phone-group{display:flex;align-items:stretch;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--card)}
+.phone-group .cc{display:flex;align-items:center;gap:6px;padding:0 12px;background:var(--mint);color:var(--teal-d);font-weight:600;font-size:.92rem;white-space:nowrap}
+.phone-group input{border:0;border-radius:0;background:transparent}
+.phone-group input:focus{outline:none}
+.err{color:var(--rose);font-size:.82rem;margin-top:5px}
+.rows div{display:flex;justify-content:space-between;gap:16px;padding:10px 0;border-bottom:1px dashed var(--line);font-size:.94rem}
+.rows div:last-child{border:0}
+.rows span:first-child{color:var(--muted)}
+.nav2{display:flex;justify-content:space-between;gap:10px;margin-top:20px}
+.ok{text-align:center;padding:36px 20px}
+.ok .id{font-family:"Bricolage Grotesque",sans-serif;font-size:1.6rem;background:var(--mint);color:var(--teal-d);display:inline-block;padding:8px 18px;border-radius:12px;margin:14px 0}
+.check{width:58px;height:58px;border-radius:50%;background:var(--teal);color:#fff;display:grid;place-items:center;font-size:1.6rem;margin:0 auto}
+.note{background:var(--mint);border-radius:12px;padding:14px 16px;font-size:.88rem;color:var(--teal-d);margin-top:18px;text-align:left}
+/* admin */
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:20px}
+.kpi{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px}
+.kpi b{display:block;font-family:"Bricolage Grotesque",sans-serif;font-size:1.8rem;margin-top:4px}
+.kpi span{color:var(--muted);font-size:.85rem}
+.tablewrap{overflow-x:auto;background:var(--card);border:1px solid var(--line);border-radius:14px;margin-top:20px}
+table{border-collapse:collapse;width:100%;min-width:760px;font-size:.9rem}
+th,td{text-align:left;padding:13px 14px;border-bottom:1px solid var(--line);white-space:nowrap}
+th{font-size:.78rem;color:var(--muted);font-weight:600}
+tr:last-child td{border:0}
+.st{border-radius:999px;padding:3px 10px;font-size:.76rem;font-weight:600;border:1px solid}
+.st.confirmed{background:var(--mint);color:var(--teal-d);border-color:#BBD9D2}
+.st.pending{background:#FBF1DE;color:var(--amber);border-color:#EED9AF}
+.st.cancelled{background:#F8E9E8;color:var(--rose);border-color:#EDCECD}
+.st.completed{background:#ECEFEE;color:var(--muted);border-color:var(--line)}
+.st.noshow{background:#F3EAF5;color:#7A5E8C;border-color:#DCCDE2}
+.btn.danger{background:var(--rose)}
+.btn.danger:hover{background:#933b37}
+.actions{display:flex;gap:6px;align-items:center;flex-wrap:wrap;justify-content:flex-end}
+.pwpanel{display:flex;gap:8px;align-items:center;flex-wrap:wrap;background:var(--mint);border-radius:12px;padding:12px 14px;margin-top:8px}
+.pwpanel label{width:100%;margin:0}
+.pwpanel input{flex:1;min-width:180px;max-width:260px}
+.empty{padding:28px;text-align:center;color:var(--muted);font-size:.92rem}
+.atabs{display:flex;gap:6px;margin:20px 0 6px;border-bottom:1px solid var(--line)}
+.atabs button{padding:10px 4px;color:var(--muted);font-weight:600;font-size:.92rem;border-bottom:2px solid transparent;margin-right:18px}
+.atabs button.on{color:var(--teal-d);border-color:var(--teal)}
+.docrow{display:flex;flex-wrap:wrap;align-items:center;gap:14px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin-top:12px}
+.docrow .ava{width:46px;height:46px;border-radius:12px;overflow:hidden;flex:none}
+.docrow .meta{flex:1;min-width:190px}
+.docrow .meta small{color:var(--muted)}
+.docrow.off{opacity:.55}
+.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:0 16px}
+.formgrid .full{grid-column:1/-1}
+.days{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
+.daychip{border:1px solid var(--line);border-radius:8px;padding:7px 10px;font-size:.85rem;background:var(--card)}
+.daychip.on{background:var(--teal);color:#fff;border-color:var(--teal)}
+@media(max-width:700px){.formgrid{grid-template-columns:1fr}}
+.calhead{display:flex;align-items:center;justify-content:space-between;margin-top:18px}
+.calgrid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-top:14px}
+.calgrid .dow{text-align:center;font-size:.78rem;color:var(--muted);font-weight:600;padding:4px 0}
+.calcell{aspect-ratio:1;border:1px solid var(--line);border-radius:10px;background:var(--card);padding:6px;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:4px;position:relative}
+.calcell.pad{background:transparent;border-color:transparent}
+.calcell.today{border-color:var(--teal)}
+.calcell.sel{background:var(--teal);border-color:var(--teal)}
+.calcell.sel .dnum,.calcell.sel .badge{color:#fff}
+.calcell .dnum{font-size:.88rem;font-weight:600}
+.calcell .badge{font-size:.72rem;background:var(--mint);color:var(--teal-d);border-radius:999px;padding:1px 7px;margin-top:auto}
+.calcell.sel .badge{background:rgba(255,255,255,.25)}
+.daylist{margin-top:18px}
+.daycard{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin-top:10px}
+@media(max-width:600px){.calcell .dnum{font-size:.78rem}.calcell .badge{padding:0 5px;font-size:.66rem}}
+.filterbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:18px}
+.filterbar input[type="text"],.filterbar input[type="date"]{width:auto;min-width:160px}
+.filterbar select{width:auto}
+.recpanel{background:var(--mint);border-radius:14px;padding:16px;margin-top:10px}
+.recpanel label{margin-top:10px}
+.recnote{display:flex;gap:8px;margin-top:10px}
+.lookup{max-width:440px;margin:48px auto}
+.lookup .row{display:flex;gap:8px}
+#lid{text-transform:uppercase}
+footer{border-top:1px solid var(--line);padding:26px 0;color:var(--muted);font-size:.86rem;margin-top:30px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.hide{display:none!important}
+@media(max-width:820px){
+  .hero{grid-template-columns:1fr;padding:40px 0 32px;gap:28px}
+  .g3{grid-template-columns:1fr}
+  .kpis{grid-template-columns:repeat(2,1fr)}
+  .bar{height:auto;padding:10px 0;flex-wrap:wrap}
+  nav{margin-left:0;width:100%}
+}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+html[dir="rtl"] body{font-family:Cairo,Inter,system-ui,sans-serif}
+html[dir="rtl"] h1,html[dir="rtl"] h2,html[dir="rtl"] h3,html[dir="rtl"] .brand{font-family:Cairo,sans-serif;letter-spacing:0}
+html[dir="rtl"] .hero,html[dir="rtl"] .doc,html[dir="rtl"] .pick,html[dir="rtl"] .docrow,html[dir="rtl"] .daycard,html[dir="rtl"] .kpi span,html[dir="rtl"] .rows div{text-align:right}
+html[dir="rtl"] .rows div{flex-direction:row-reverse}
+html[dir="rtl"] .phone-group{flex-direction:row-reverse}
+html[dir="rtl"] .steps{flex-direction:row-reverse}
+html[dir="rtl"] nav{margin-left:0;margin-right:auto}
+html[dir="rtl"] .nav2{flex-direction:row-reverse}
+html[dir="rtl"] input,html[dir="rtl"] select{text-align:right}
+html[dir="rtl"] #lid{text-align:center}
+:root:not([data-theme="light"]){}
+@media(prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){--bg:#0E1A19;--card:#152624;--line:#26403D;--text:#E7F1EE;--ink:#E7F1EE;--muted:#9BB3AF;--mint:#1C3532;--paper:#0E1A19}
+  :root:not([data-theme="light"]) header{background:rgba(14,26,25,.92)}
+  :root:not([data-theme="light"]) .slot[disabled]{background:#1B2B29;color:#6C8783}
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap bar">
+    <div class="brand"><span class="logo" id="logo"></span> <span id="nv-brand">CarePlus Medical Clinic</span></div>
+    <nav>
+      <button id="nv-home" onclick="go('home')">Home</button>
+      <button id="nv-doctors" onclick="go('doctors')">Doctors</button>
+      <button id="nv-lookup" onclick="go('lookup')">My appointment</button>
+      <button id="nv-doclogin" onclick="go(loggedDoctor?'docportal':'doclogin')">Doctor login</button>
+      <button id="nv-patlogin" onclick="go(loggedPatient?'patientportal':'patientlogin')">Patient login</button>
+      <button id="nv-admin" onclick="go('admin')">Admin</button>
+      <button id="nv-book" class="btn sm" onclick="startBooking()">Book appointment</button>
+      <button id="nv-lang" class="btn ghost sm" onclick="toggleLang()">العربية</button>
+    </nav>
+  </div>
+</header>
+
+<main id="app"></main>
+
+<footer class="wrap">
+  <span id="nv-footaddr">CarePlus Medical Clinic · 12 Nile Street, Maadi, Cairo · +20 100 123 4567</span>
+  <span id="nv-footnote">Demo preview — sample data only</span>
+</footer>
+
+<script>
+/* ---------- demo data ---------- */
+const CLINIC={name:"CarePlus Medical Clinic",address:"12 Nile Street, Maadi, Cairo",phone:"+20 100 123 4567"};
+const specialties=[
+  {id:1,name:"Dermatology",icon:"✦",desc:"Skin, hair and nail care for all ages.",active:true},
+  {id:2,name:"Dentistry",icon:"◈",desc:"Cleaning, fillings, whitening and check-ups.",active:true},
+  {id:3,name:"Cardiology",icon:"♥",desc:"Heart check-ups, ECG and follow-up care.",active:true}
+];
+// days: 0=Sun .. 6=Sat
+const doctors=[
+  {id:1,name:"Dr. Ahmed Hassan",spec:1,exp:12,fee:400,bio:"Consultant dermatologist, laser and acne treatment.",
+   days:[6,0,1,2,3],start:"16:00",end:"21:00",slot:30,breakStart:"18:30",breakEnd:"19:00",active:true},
+  {id:2,name:"Dr. Mona Saleh",spec:2,exp:8,fee:300,bio:"Dentist focused on cosmetic and preventive care.",
+   days:[0,2,4],start:"10:00",end:"15:00",slot:30,breakStart:"12:00",breakEnd:"12:30",active:true},
+  {id:3,name:"Dr. Karim Fouad",spec:3,exp:15,fee:500,bio:"Cardiologist, ECG and hypertension follow-up.",
+   days:[1,3,6],start:"17:00",end:"20:00",slot:30,breakStart:null,breakEnd:null,active:true}
+];
+const iso=d=>d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
+const today=new Date(); today.setHours(0,0,0,0);
+const plus=n=>{const d=new Date(today);d.setDate(d.getDate()+n);return d};
+// one patient already registered + booked appointments
+const appointments=[
+  {id:"APT-"+iso(plus(2)).replace(/-/g,"")+"-1025",patient:"Mona Adel",phone:"+20 111 222 3344",doctor:1,date:iso(plus(2)),time:"17:00",fee:400,status:"confirmed"},
+  {id:"APT-"+iso(today).replace(/-/g,"")+"-1008",patient:"Mona Adel",phone:"+20 111 222 3344",doctor:2,date:iso(today),time:"11:00",fee:300,status:"pending"}
+];
+const notifications=[]; // {apptId,type,recipient,status,scheduledAt,sentAt}
+const patientRecords={}; // phone -> {chronic,meds,notes:[{date,by,text}]}
+function recordFor(phone){if(!patientRecords[phone])patientRecords[phone]={chronic:"",meds:"",notes:[]};return patientRecords[phone]}
+const REMINDER_HOURS={val:5};
+function digitsOnly(p){return p.replace(/[^\d]/g,"")}
+function waLink(phone,text){return "https://wa.me/"+digitsOnly(phone)+"?text="+encodeURIComponent(text)}
+function normalizeEgyptPhone(local){
+  let d=String(local).replace(/\D/g,"");
+  if(d.startsWith("20"))d=d.slice(2);
+  if(d.startsWith("0"))d=d.slice(1);
+  return "+20 "+(d.length>=10?d.slice(0,3)+" "+d.slice(3,6)+" "+d.slice(6):d);
+}
+function confirmationText(a,d){
+  return `*Appointment Confirmed*\n${CLINIC.name}\n\n`+
+  `Patient: ${a.patient}\n`+
+  `Doctor: ${d.name}\n`+
+  `Specialty: ${spec(d.spec).name}\n`+
+  `Date: ${nice(a.date)}\n`+
+  `Time: ${t12(a.time)}\n`+
+  `Fee: ${money(a.fee)}\n`+
+  `ID: ${a.id}\n\n`+
+  `Location: ${CLINIC.address}\n`+
+  `Phone: ${CLINIC.phone}`;
+}
+function reminderTime(a){
+  const dt=new Date(a.date+"T"+a.time+":00");
+  dt.setHours(dt.getHours()-REMINDER_HOURS.val);
+  return dt;
+}
+function removeReminder(apptId){for(let i=notifications.length-1;i>=0;i--){if(notifications[i].apptId===apptId&&notifications[i].type==="Appointment reminder")notifications.splice(i,1)}}
+function addReminder(a){const r=reminderTime(a);notifications.push({apptId:a.id,type:"Appointment reminder",recipient:a.phone,status:r<new Date()?"skipped (past)":"scheduled",scheduledAt:r,sentAt:null})}
+function scheduleNotifications(a){
+  notifications.push({apptId:a.id,type:"Booking confirmation",recipient:a.phone,status:"ready",scheduledAt:null,sentAt:null});
+  addReminder(a);
+}
+const locale=()=>LANG==="ar"?"ar-EG":"en-GB";
+function fmtDT(d){return d?d.toLocaleString(locale(),{day:"2-digit",month:"short",hour:"2-digit",minute:"2-digit"}):"—"}
+const SEED=JSON.stringify({doctors,appointments,specialties});
+appointments.forEach(a=>{if(a.status!=="cancelled")scheduleNotifications(a)});
+
+/* ---------- auto-save in this browser ---------- */
+const STORE_KEY="careplus_demo_v1";
+let storageOk=true;
+function saveState(){
+  try{
+    localStorage.setItem(STORE_KEY,JSON.stringify({v:1,doctors,appointments,notifications,lead:REMINDER_HOURS.val,lang:LANG,records:patientRecords,specialties}));
+  }catch(e){storageOk=false}
+}
+function loadState(){
+  try{
+    const raw=localStorage.getItem(STORE_KEY);
+    if(!raw)return false;
+    const st=JSON.parse(raw);
+    if(!st||st.v!==1||!Array.isArray(st.doctors)||!Array.isArray(st.appointments)||!Array.isArray(st.notifications))return false;
+    doctors.length=0; st.doctors.forEach(d=>doctors.push(d));
+    appointments.length=0; st.appointments.forEach(a=>appointments.push(a));
+    if(Array.isArray(st.specialties)){specialties.length=0; st.specialties.forEach(sp=>specialties.push(sp));}
+    Object.keys(patientRecords).forEach(k=>delete patientRecords[k]);
+    if(st.records)Object.keys(st.records).forEach(k=>patientRecords[k]=st.records[k]);
+    notifications.length=0;
+    st.notifications.forEach(n=>notifications.push(Object.assign({},n,{scheduledAt:n.scheduledAt?new Date(n.scheduledAt):null,sentAt:n.sentAt?new Date(n.sentAt):null})));
+    REMINDER_HOURS.val=st.lead||5;
+    if(st.lang)LANG=st.lang;
+    return true;
+  }catch(e){storageOk=false;return false}
+}
+function resetDemo(){
+  const sd=JSON.parse(SEED);
+  doctors.length=0; sd.doctors.forEach(d=>doctors.push(d));
+  appointments.length=0; sd.appointments.forEach(a=>appointments.push(a));
+  specialties.length=0; sd.specialties.forEach(sp=>specialties.push(sp));
+  Object.keys(patientRecords).forEach(k=>delete patientRecords[k]);
+  notifications.length=0; appointments.forEach(a=>{if(a.status!=="cancelled")scheduleNotifications(a)});
+  REMINDER_HOURS.val=5;
+  loggedDoctor=null;docLoginPick=null;pwEdit=null;docForm=null;askCancelId=null;resetAsk=false;lookupId="";lookupErr="";recOpen=null;loggedPatient=null;patRegMode=false;patLoginErr="";specForm=null;rescheduleId=null;rescheduleErr="";patAskReset=null;
+  render();updateChrome();
+}
+loadState();
+
+const spec=id=>specialties.find(s=>s.id===id);
+const doc=id=>doctors.find(d=>d.id===id);
+const money=n=>n+" EGP";
+const STATUS_LABEL={pending:"Pending",confirmed:"Confirmed",cancelled:"Cancelled",completed:"Completed",noshow:"No show"};
+const stl=s=>STATUS_LABEL[s]||s;
+const nice=s=>new Date(s+"T00:00:00").toLocaleDateString(locale(),{weekday:"short",day:"numeric",month:"short"});
+const t12=t=>{let[h,m]=t.split(":").map(Number);const ap=LANG==="ar"?(h>=12?"م":"ص"):(h>=12?"PM":"AM");h=h%12||12;return h+":"+String(m).padStart(2,"0")+" "+ap};
+
+/* ---------- fake artwork (inline SVG) ---------- */
+const LOGO=`<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 21s-7.5-4.6-7.5-9.7A4.3 4.3 0 0 1 12 8.6a4.3 4.3 0 0 1 7.5 2.7C19.5 16.4 12 21 12 21Z" fill="#fff" opacity=".95"/><path d="M12 11.2v3.6M10.2 13h3.6" stroke="#1B6F6A" stroke-width="1.6" stroke-linecap="round"/></svg>`;
+const ICONS={
+ 1:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M7 4.5c-2 2.5-3 5-3 8a8 8 0 0 0 16 0c0-3-1-5.5-3-8"/><path d="M9 11.5h.01M13 14h.01M15.5 10h.01M10.5 15.5h.01"/></svg>`,
+ 2:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M8 3.5c-2.5 0-4 2-4 4.8 0 3.4 1.2 5.6 2 8.4.5 1.7.8 3.3 2 3.3 1.3 0 1.4-2.2 1.8-4 .3-1.3.7-2 2.2-2s1.9.7 2.2 2c.4 1.8.5 4 1.8 4 1.2 0 1.5-1.6 2-3.3.8-2.8 2-5 2-8.4 0-2.8-1.5-4.8-4-4.8-1.6 0-2.6.8-4 .8s-2.4-.8-4-.8Z"/></svg>`,
+ 3:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7.5-4.7-7.5-9.8A4.2 4.2 0 0 1 12 7.5a4.2 4.2 0 0 1 7.5 2.7C19.5 15.3 12 20 12 20Z"/><path d="M4.8 12.4h3.4l1.5-2.4 2 4.4 1.5-2.6 1 .6h4.6"/></svg>`};
+const ICON_DEFAULT=`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 8v8M8 12h8"/></svg>`;
+const specIcon=id=>ICONS[id]||ICON_DEFAULT;
+const LOOKS={
+ 1:{bg:"#DCEBE6",skin:"#E3B183",hair:"#2C2118",beard:1,hijab:0},
+ 2:{bg:"#EDE6F2",skin:"#EFC49B",hair:"#3A2A20",beard:0,hijab:1,scarf:"#7A5E8C"},
+ 3:{bg:"#E7EEF6",skin:"#D6A171",hair:"#494037",beard:0,hijab:0}
+};
+function portrait(id){
+  const L=LOOKS[id]||LOOKS[1];
+  return `<svg viewBox="0 0 120 120" role="img" aria-label="Doctor photo">
+   <rect width="120" height="120" fill="${L.bg}"/>
+   <circle cx="60" cy="112" r="46" fill="#F7FAF9"/>
+   ${L.hijab?`<path d="M60 20c-17 0-27 13-27 30 0 14 5 20 5 30h44c0-10 5-16 5-30 0-17-10-30-27-30Z" fill="${L.scarf}"/>`:""}
+   <path d="M60 22c-14 0-22 9-22 22v6h44v-6c0-13-8-22-22-22Z" fill="${L.hair}"/>
+   <circle cx="60" cy="52" r="21" fill="${L.skin}"/>
+   ${L.hijab?`<path d="M60 22c-13 0-21 8-21 20 0 3 1 5 1 5-4-2-6-8-6-13 0-13 11-21 26-21s26 8 26 21c0 5-2 11-6 13 0 0 1-2 1-5 0-12-8-20-21-20Z" fill="${L.scarf}"/>`:""}
+   <path d="M39 48c0-13 9-20 21-20s21 7 21 20c0-2-6-6-21-6s-21 4-21 6Z" fill="${L.hair}"/>
+   ${L.beard?`<path d="M42 55c0 14 8 22 18 22s18-8 18-22c0 8-6 11-18 11s-18-3-18-11Z" fill="${L.hair}" opacity=".85"/>`:""}
+   <circle cx="52" cy="52" r="2" fill="#2B211B"/><circle cx="68" cy="52" r="2" fill="#2B211B"/>
+   <path d="M55 62c3 2 7 2 10 0" stroke="#B4795A" stroke-width="2" fill="none" stroke-linecap="round"/>
+   <path d="M60 74c-16 0-30 10-32 26l-1 20h66l-1-20c-2-16-16-26-32-26Z" fill="#FFFFFF"/>
+   <path d="M52 75l8 9 8-9 6 3-14 15-14-15 6-3Z" fill="#CFE3DE"/>
+   <path d="M50 77c-2 12 0 20 4 24M70 77c2 12 0 20-4 24" stroke="#1B6F6A" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+   <circle cx="66" cy="102" r="4" fill="#1B6F6A"/>
+  </svg>`;
+}
+const HERO_ART=`<svg viewBox="0 0 520 380" role="img" aria-label="Illustration of the CarePlus clinic reception">
+ <rect width="520" height="380" fill="#E4F0EC"/>
+ <circle cx="420" cy="80" r="70" fill="#D3E7E1"/>
+ <rect x="40" y="70" width="230" height="170" rx="10" fill="#FFFFFF" stroke="#C6DCD6" stroke-width="2"/>
+ <rect x="40" y="70" width="230" height="34" rx="10" fill="#1B6F6A"/>
+ <circle cx="58" cy="87" r="4" fill="#9FD4CC"/><circle cx="72" cy="87" r="4" fill="#9FD4CC"/>
+ <rect x="62" y="126" width="80" height="10" rx="5" fill="#D9E8E4"/>
+ <rect x="62" y="148" width="130" height="10" rx="5" fill="#EDF3F1"/>
+ <rect x="62" y="170" width="110" height="10" rx="5" fill="#EDF3F1"/>
+ <rect x="62" y="198" width="86" height="24" rx="8" fill="#1B6F6A"/>
+ <rect x="300" y="150" width="180" height="150" rx="12" fill="#FFFFFF" stroke="#C6DCD6" stroke-width="2"/>
+ <rect x="316" y="170" width="148" height="12" rx="6" fill="#1B6F6A"/>
+ <g fill="#DCE9E5">
+  <rect x="316" y="196" width="28" height="24" rx="5"/><rect x="352" y="196" width="28" height="24" rx="5"/>
+  <rect x="388" y="196" width="28" height="24" rx="5"/><rect x="424" y="196" width="28" height="24" rx="5"/>
+  <rect x="316" y="228" width="28" height="24" rx="5"/><rect x="388" y="228" width="28" height="24" rx="5"/>
+  <rect x="424" y="228" width="28" height="24" rx="5"/><rect x="316" y="260" width="28" height="24" rx="5"/>
+  <rect x="352" y="260" width="28" height="24" rx="5"/><rect x="388" y="260" width="28" height="24" rx="5"/>
+ </g>
+ <rect x="352" y="228" width="28" height="24" rx="5" fill="#1B6F6A"/>
+ <path d="M150 300c0-34 24-58 56-58s56 24 56 58Z" fill="#FFFFFF"/>
+ <circle cx="206" cy="228" r="26" fill="#E3B183"/>
+ <path d="M180 224c0-16 11-24 26-24s26 8 26 24c0-4-8-9-26-9s-26 5-26 9Z" fill="#2C2118"/>
+ <path d="M196 252c-4 14-2 26 4 34M216 252c4 14 2 26-4 34" stroke="#1B6F6A" stroke-width="4" fill="none" stroke-linecap="round"/>
+ <circle cx="212" cy="290" r="6" fill="#1B6F6A"/>
+ <rect x="60" y="300" width="400" height="8" rx="4" fill="#C6DCD6"/>
+</svg>`;
+const MAP_ART=`<svg viewBox="0 0 900 260" role="img" aria-label="Map placeholder showing the clinic location">
+ <rect width="900" height="260" fill="#EAF1EE"/>
+ <g stroke="#D3E2DD" stroke-width="2">
+  <path d="M0 60H900M0 130H900M0 200H900M150 0V260M330 0V260M520 0V260M700 0V260"/>
+ </g>
+ <path d="M0 130H900" stroke="#C6DCD6" stroke-width="14"/>
+ <path d="M330 0V260" stroke="#C6DCD6" stroke-width="12"/>
+ <rect x="40" y="20" width="80" height="60" rx="6" fill="#DFEAE6"/>
+ <rect x="560" y="160" width="110" height="70" rx="6" fill="#DFEAE6"/>
+ <rect x="740" y="30" width="120" height="70" rx="6" fill="#DFEAE6"/>
+ <path d="M400 70c-16 0-28 12-28 28 0 21 28 46 28 46s28-25 28-46c0-16-12-28-28-28Z" fill="#1B6F6A"/>
+ <circle cx="400" cy="98" r="10" fill="#FFFFFF"/>
+ <rect x="440" y="88" width="180" height="30" rx="8" fill="#FFFFFF"/>
+ <text x="456" y="108" font-family="Inter,sans-serif" font-size="14" fill="#0F2E2C">CarePlus, Maadi</text>
+</svg>`;
+
+/* ---------- slot engine (demo version) ---------- */
+function slotsFor(d,dateStr){
+  const mins=t=>{const[a,b]=t.split(":").map(Number);return a*60+b};
+  const fmt=v=>String(Math.floor(v/60)).padStart(2,"0")+":"+String(v%60).padStart(2,"0");
+  const out=[];
+  for(let t=mins(d.start);t+d.slot<=mins(d.end);t+=d.slot){
+    if(d.breakStart&&t<mins(d.breakEnd)&&t+d.slot>mins(d.breakStart))continue;
+    const time=fmt(t);
+    const taken=appointments.some(a=>a.doctor===d.id&&a.date===dateStr&&a.time===time&&a.status!=="cancelled");
+    out.push({time,taken});
+  }
+  return out;
+}
+function datesFor(d){
+  const out=[];
+  for(let i=0;i<14;i++){const dt=plus(i);if(d.days.includes(dt.getDay()))out.push(iso(dt))}
+  return out.slice(0,8);
+}
+
+/* ---------- state ---------- */
+let view="home", step=1, sel={spec:null,doc:null,date:null,time:null,name:"",phone:"",email:""}, lastId=null, admin=false, errs={}, adminTab="dashboard", docForm=null, docErrs={}, calMonth=new Date(today.getFullYear(),today.getMonth(),1), calSelected=iso(today), lookupId="", lookupErr="", loggedDoctor=null, docLoginPick=null, docLoginErr="", pwEdit=null, pwErr="", askCancelId=null, docPwOpen=false, docPwErr="", resetAsk=false, LANG="en", recOpen=null, loggedPatient=null, patRegMode=false, patLoginErr="", apptSearch="", apptDocFilter="all", apptStatusFilter="all", apptDateFilter="", specForm=null, specErrs={}, rescheduleId=null, rescheduleDate="", rescheduleTime=null, rescheduleErr="", patAskReset=null;
+const go=v=>{view=v;window.scrollTo(0,0);render()};
+const startBooking=()=>{step=1;sel={spec:null,doc:null,date:null,time:null,name:"",phone:"",email:""};errs={};go("book")};
+const el=id=>document.getElementById(id);
+
+/* ---------- views ---------- */
+function home(){
+  return `<div class="wrap">
+    <div class="hero">
+      <div>
+        <h1>Book a doctor at CarePlus in under a minute.</h1>
+        <p class="lede">Choose a specialty, pick a doctor and a free time slot, and get an appointment ID right away. No calls, no waiting on the line.</p>
+        <div class="cta"><button class="btn" onclick="startBooking()">Book appointment</button>
+        <button class="btn ghost" onclick="go('doctors')">See our doctors</button></div>
+      </div>
+      <div>
+      <div class="hero-art">${HERO_ART}</div>
+      <div class="hours" style="margin-top:16px">
+        <h3>Working hours</h3>
+        <div><span>Saturday – Wednesday</span><span>10:00 AM – 9:00 PM</span></div>
+        <div><span>Thursday</span><span>10:00 AM – 3:00 PM</span></div>
+        <div><span>Friday</span><span>Closed</span></div>
+        <div><span>Address</span><span>${CLINIC.address}</span></div>
+        <div><span>Phone</span><span>${CLINIC.phone}</span></div>
+      </div>
+      </div>
+    </div>
+    <section class="block">
+      <h2>Specialties</h2>
+      <p class="sub">Three clinics running now, more opening soon.</p>
+      <div class="grid g3">${specialties.filter(s=>s.active).map(s=>`
+        <button class="card" onclick="pickSpec(${s.id})">
+          <span class="dot">${specIcon(s.id)}</span>
+          <h3>${s.name}</h3><p>${s.desc}</p>
+          <p class="fee">${doctors.filter(d=>d.spec===s.id&&d.active).length} doctor available</p>
+        </button>`).join("")}</div>
+    </section>
+    ${docList()}
+    <section class="block">
+      <h2>Find us</h2>
+      <p class="sub">${CLINIC.address} — free parking behind the building.</p>
+      <div class="map" style="margin-top:20px">${MAP_ART}</div>
+    </section>
+  </div>`;
+}
+function docList(){
+  return `<section class="block">
+    <h2>Our doctors</h2>
+    <p class="sub">Each doctor has their own days and hours, so slots differ.</p>
+    <div class="grid g3">${doctors.filter(d=>d.active&&spec(d.spec).active).map(d=>`
+      <div class="card">
+        <div class="photo">${portrait(d.id)}</div>
+        <div class="doc">
+          <div><h3>${d.name}</h3><span class="tag">${spec(d.spec).name}</span>
+          <p>${d.exp} years experience</p></div></div>
+        <p style="margin-top:12px">${d.bio}</p>
+        <p class="fee">Consultation ${money(d.fee)}</p>
+        <div style="margin-top:14px"><button class="btn sm" onclick="pickDoc(${d.id})">Book with ${d.name.split(" ")[1]}</button></div>
+      </div>`).join("")}</div>
+  </section>`;
+}
+function doctorsPage(){return `<div class="wrap">${docList()}</div>`}
+
+function pickSpec(id){sel.spec=id;sel.doc=null;step=2;go("book")}
+function pickDoc(id){sel.doc=id;sel.spec=doc(id).spec;step=3;go("book")}
+
+function book(){
+  const names=["Specialty","Doctor","Date","Time","Your details","Review"];
+  const bar=`<ol class="steps">${names.map((n,i)=>`<li class="${step===i+1?"on":step>i+1?"done":""}">${i+1}. ${n}</li>`).join("")}</ol>`;
+  let body="";
+  if(step===1){
+    body=`<h2>Choose a specialty</h2><div style="margin-top:16px">${specialties.filter(s=>s.active).map(s=>`
+      <button class="pick ${sel.spec===s.id?"sel":""}" onclick="pickSpec(${s.id})">
+        <span class="dot" style="margin:0">${specIcon(s.id)}</span>
+        <span><b>${s.name}</b><br><span style="color:var(--muted);font-size:.88rem">${s.desc}</span></span></button>`).join("")}</div>`;
+  }
+  if(step===2){
+    const list=doctors.filter(d=>d.spec===sel.spec&&d.active);
+    body=`<h2>Choose a doctor</h2><p class="sub">${spec(sel.spec).name}</p><div style="margin-top:16px">${
+      list.length?list.map(d=>`<button class="pick ${sel.doc===d.id?"sel":""}" onclick="pickDoc(${d.id})">
+        <span class="ava">${portrait(d.id)}</span>
+        <span><b>${d.name}</b><br><span style="color:var(--muted);font-size:.88rem">${d.exp} years · ${money(d.fee)}</span></span></button>`).join("")
+      :`<div class="empty">No doctors in this specialty yet. Pick another one.</div>`}</div>`;
+  }
+  if(step===3){
+    const d=doc(sel.doc);
+    body=`<h2>Choose a date</h2><p class="sub">${d.name} works ${d.days.map(x=>["Sun","Mon","Tue","Wed","Thu","Fri","Sat"][x]).join(", ")}</p>
+      <div class="dates" style="margin-top:16px">${datesFor(d).map(ds=>`
+        <button class="date ${sel.date===ds?"sel":""}" onclick="setDate('${ds}')">
+          <small>${nice(ds).split(" ")[0]}</small><b>${new Date(ds+"T00:00:00").getDate()}</b>
+          <small>${nice(ds).split(" ")[2]}</small></button>`).join("")}</div>`;
+  }
+  if(step===4){
+    const d=doc(sel.doc), list=slotsFor(d,sel.date);
+    body=`<h2>Choose a time</h2><p class="sub">${nice(sel.date)} · ${d.name} · ${d.slot}-minute slots</p>
+      <div class="slots" style="margin-top:16px">${list.map(s=>`
+        <button class="slot ${sel.time===s.time?"sel":""}" ${s.taken?"disabled aria-label='Booked'":""} onclick="setTime('${s.time}')">
+          ${t12(s.time)}${s.taken?"<br><small>Booked</small>":""}</button>`).join("")}</div>
+      <div class="note">Crossed-out times are already booked. The 5:00 PM slot is taken by a registered patient in this demo.</div>`;
+  }
+  if(step===5){
+    body=`<h2>Your details</h2>
+      <label for="n">Full name</label><input id="n" autocomplete="off" value="${sel.name}" placeholder="e.g. Nour Ibrahim">${errs.name?`<div class="err">${errs.name}</div>`:""}
+      <label for="p">Phone / WhatsApp number</label>
+      <div class="phone-group"><span class="cc">🇪🇬 +20</span><input id="p" autocomplete="off" value="${sel.phone}" placeholder="1XX XXX XXXX"></div>
+      ${errs.phone?`<div class="err">${errs.phone}</div>`:""}
+      <label for="e">Email (optional)</label><input id="e" autocomplete="off" value="${sel.email}" placeholder="name@email.com">${errs.email?`<div class="err">${errs.email}</div>`:""}`;
+  }
+  if(step===6){
+    const d=doc(sel.doc);
+    body=`<h2>Review your appointment</h2>
+      <div class="doc" style="margin-top:16px;align-items:center"><span class="ava">${portrait(d.id)}</span>
+        <div><b>${d.name}</b><br><span class="tag">${spec(d.spec).name}</span></div></div>
+      <div class="rows" style="margin-top:14px">
+        <div><span>Specialty</span><span>${spec(sel.spec).name}</span></div>
+        <div><span>Doctor</span><span>${d.name}</span></div>
+        <div><span>Date</span><span>${nice(sel.date)}</span></div>
+        <div><span>Time</span><span>${t12(sel.time)}</span></div>
+        <div><span>Patient</span><span>${sel.name}</span></div>
+        <div><span>Phone</span><span>${normalizeEgyptPhone(sel.phone)}</span></div>
+        <div><span>Consultation fee</span><span>${money(d.fee)}</span></div>
+      </div>
+      <div class="note">After you confirm, you'll get a button to send the confirmation on WhatsApp to ${sel.phone?normalizeEgyptPhone(sel.phone):"this number"} yourself.</div>`;
+  }
+  const canNext=[null,sel.spec,sel.doc,sel.date,sel.time,true,true][step];
+  return `<div class="wrap" style="padding-top:28px;padding-bottom:20px">
+    ${bar}
+    <div class="panel">${body}
+      <div class="nav2">
+        <button class="btn ghost" onclick="back()" ${step===1?"disabled":""}>Back</button>
+        ${step===6?`<button class="btn" onclick="confirmBooking()">Confirm appointment</button>`
+          :`<button class="btn" onclick="next()" ${canNext?"":"disabled"}>Continue</button>`}
+      </div>
+    </div>
+  </div>`;
+}
+function setDate(d){sel.date=d;sel.time=null;render()}
+function setTime(t){sel.time=t;render()}
+function back(){if(step===5)saveForm();step--;render()}
+function next(){
+  if(step===5){saveForm();errs={};
+    if(!sel.name.trim())errs.name="Enter the patient name.";
+    if(!/^\d{8,11}$/.test(sel.phone.replace(/\D/g,"")))errs.phone="Enter a valid Egyptian mobile number (e.g. 1001234567).";
+    if(sel.email&&!/^\S+@\S+\.\S+$/.test(sel.email))errs.email="Check the email format.";
+    if(Object.keys(errs).length){render();return}
+  }
+  step++;render();
+}
+function saveForm(){if(el("n")){sel.name=el("n").value;sel.phone=el("p").value;sel.email=el("e").value}}
+function confirmBooking(){
+  const clash=appointments.some(a=>a.doctor===sel.doc&&a.date===sel.date&&a.time===sel.time&&a.status!=="cancelled");
+  if(clash){step=4;sel.time=null;alert("That time was just booked. Please choose another slot.");render();return}
+  const d=doc(sel.doc);
+  lastId="APT-"+sel.date.replace(/-/g,"")+"-"+Math.floor(1000+Math.random()*9000);
+  const appt={id:lastId,patient:sel.name,phone:normalizeEgyptPhone(sel.phone),doctor:d.id,date:sel.date,time:sel.time,fee:d.fee,status:"confirmed"};
+  appointments.push(appt);
+  scheduleNotifications(appt);
+  go("done");
+}
+function done(){
+  const a=appointments.find(x=>x.id===lastId), d=doc(a.doctor);
+  const n=notifications.find(x=>x.apptId===a.id&&x.type==="Booking confirmation");
+  const r=notifications.find(x=>x.apptId===a.id&&x.type==="Appointment reminder");
+  return `<div class="wrap"><div class="panel ok" style="max-width:540px;margin:40px auto">
+    <div class="check">✓</div>
+    <h2 style="margin-top:16px">Appointment confirmed</h2>
+    <p class="sub">Keep this ID — you'll need it at reception.</p>
+    <div class="id">${a.id}</div>
+    <div class="rows" style="text-align:left">
+      <div><span>Doctor</span><span>${d.name}</span></div>
+      <div><span>Specialty</span><span>${spec(d.spec).name}</span></div>
+      <div><span>Date</span><span>${nice(a.date)}</span></div>
+      <div><span>Time</span><span>${t12(a.time)}</span></div>
+      <div><span>Patient</span><span>${a.patient}</span></div>
+      <div><span>Fee</span><span>${money(a.fee)}</span></div>
+      <div><span>Status</span><span class="st confirmed">Confirmed</span></div>
+    </div>
+    <div style="margin-top:20px">
+      <a class="btn" style="display:block" href="${waLink(a.phone,confirmationText(a,d))}" target="_blank" rel="noopener" onclick="markSent('${a.id}')">Send confirmation on WhatsApp → ${a.phone}</a>
+      <p class="sub" style="margin-top:10px;font-size:.85rem">Opens WhatsApp with the message ready — you press Send there. This goes to the number you just entered, not a fake one.</p>
+    </div>
+    <div class="note">Reminder auto-scheduled for ${fmtDT(r.scheduledAt)} (${REMINDER_HOURS.val}h before the visit). ${CLINIC.address} · ${CLINIC.phone}</div>
+    <div style="margin-top:14px"><button class="btn ghost" onclick="go('home')">Back to home</button></div>
+  </div></div>`;
+}
+function markSent(id){const n=notifications.find(x=>x.apptId===id&&x.type==="Booking confirmation");if(n){n.status="sent";n.sentAt=new Date();saveState()}}
+function findAppt(){
+  lookupId=el("lid").value.trim();
+  askCancelId=null;
+  const a=appointments.find(x=>x.id.toLowerCase()===lookupId.toLowerCase());
+  lookupErr=a?"":"No appointment found with this ID. Check the confirmation message and try again.";
+  render();
+}
+function apptStart(a){return new Date(a.date+"T"+a.time+":00")}
+function canPatientCancel(a){return (a.status==="pending"||a.status==="confirmed")&&apptStart(a)>new Date()}
+function askCancel(id){askCancelId=id;render()}
+function cancelAppt(id){askCancelId=null;setApptStatus(id,"cancelled")}
+function cancelUI(a,label){
+  if(askCancelId===a.id)return `<span style="font-size:.85rem">Cancel this appointment?</span>
+    <button class="btn danger sm" onclick="cancelAppt('${a.id}')">Yes, cancel</button>
+    <button class="btn ghost sm" onclick="askCancel(null)">Keep it</button>`;
+  return `<button class="btn ghost sm" onclick="askCancel('${a.id}')">${label||"Cancel"}</button>`;
+}
+function lookup(){
+  const a=appointments.find(x=>x.id.toLowerCase()===lookupId.toLowerCase());
+  return `<div class="wrap"><div class="panel lookup">
+    <h2>Find your appointment</h2>
+    <p class="sub">Enter the appointment ID from your WhatsApp confirmation — no account or password needed.</p>
+    <div class="row" style="margin-top:16px">
+      <input id="lid" value="${lookupId}" placeholder="APT-20260930-8783" onkeydown="if(event.key==='Enter')findAppt()">
+      <button class="btn" onclick="findAppt()">Find</button>
+    </div>
+    ${lookupErr?`<div class="err">${lookupErr}</div>`:""}
+    ${a?(()=>{const d=doc(a.doctor);return `
+    <div class="rows" style="margin-top:20px">
+      <div><span>Status</span><span class="st ${a.status}">${stl(a.status)}</span></div>
+      <div><span>Doctor</span><span>${d.name}</span></div>
+      <div><span>Specialty</span><span>${spec(d.spec).name}</span></div>
+      <div><span>Date</span><span>${nice(a.date)}</span></div>
+      <div><span>Time</span><span>${t12(a.time)}</span></div>
+      <div><span>Patient</span><span>${a.patient}</span></div>
+      <div><span>Fee</span><span>${money(a.fee)}</span></div>
+    </div>
+    ${a.status==="cancelled"?`<div class="note">This appointment was cancelled. The time slot is free again for other patients.</div>`:""}
+    ${canPatientCancel(a)?`<div class="actions" style="margin-top:18px;justify-content:flex-start">${cancelUI(a,"Cancel appointment")}</div>`:""}`})():""}
+  </div></div>`;
+}
+
+function pickLoginDoctor(id){
+  docLoginErr="";
+  if(id&&!doc(id).pass){loggedDoctor=id;docLoginPick=null;docPwOpen=false;go("docportal");return}
+  docLoginPick=id;render();if(id)setTimeout(()=>{const e=el("dpw");if(e)e.focus()},0)
+}
+function doctorSignIn(){
+  const d=doc(docLoginPick), v=el("dpw").value;
+  if(d.pass&&v!==d.pass){docLoginErr="Wrong password. Try again.";render();return}
+  loggedDoctor=d.id;docLoginPick=null;docLoginErr="";docPwOpen=false;go("docportal");
+}
+function openDocPw(){docPwOpen=true;docPwErr="";render();setTimeout(()=>{const e=el("mypw");if(e)e.focus()},0)}
+function closeDocPw(){docPwOpen=false;docPwErr="";render()}
+function submitDocPw(){
+  const p1=el("mypw").value, p2=el("mypw2").value;
+  if(p1.length<4){docPwErr="Use at least 4 characters.";render();return}
+  if(p1!==p2){docPwErr="The two passwords do not match.";render();return}
+  doc(loggedDoctor).pendingPass=p1;docPwOpen=false;docPwErr="";render();
+}
+function docPwCard(d){
+  if(docPwOpen)return `<div class="panel" style="margin-top:16px">
+    <h3>${d.pass?"Change your password":"Create your password"}</h3>
+    <p class="sub">The clinic admin has to approve it before it starts working.</p>
+    <label for="mypw">New password</label><input id="mypw" type="password" autocomplete="off">
+    <label for="mypw2">Repeat password</label><input id="mypw2" type="password" autocomplete="off" onkeydown="if(event.key==='Enter')submitDocPw()">
+    ${docPwErr?`<div class="err">${docPwErr}</div>`:""}
+    <div class="nav2"><button class="btn ghost" onclick="closeDocPw()">Cancel</button><button class="btn" onclick="submitDocPw()">Send for approval</button></div>
+  </div>`;
+  const msg=d.pendingPass
+    ?`Your ${d.pass?"new ":""}password is waiting for admin approval. ${d.pass?"Your current password stays active until then.":"Until then, anyone can open this page by picking your name."}`
+    :d.pass?"Your login is protected by a password."
+    :"You have no login password yet — anyone can open this page by picking your name.";
+  return `<div class="daycard" style="margin-top:16px"><span style="font-size:.9rem">${msg}</span>
+    <button class="btn ghost sm" onclick="openDocPw()">${d.pendingPass?"Send a different password":d.pass?"Change password":"Create password"}</button></div>`;
+}
+function doctorLogin(){
+  const p=docLoginPick?doc(docLoginPick):null;
+  return `<div class="wrap"><div class="panel lookup">
+    <h2>Doctor login</h2>
+    ${p?`
+    <div class="doc" style="margin-top:14px;align-items:center"><span class="ava">${portrait(p.id)}</span><div><b>${p.name}</b><br><span class="tag">${spec(p.spec).name}</span></div></div>
+    <label for="dpw">Password</label>
+    <input id="dpw" type="password" autocomplete="off" onkeydown="if(event.key==='Enter')doctorSignIn()">
+    ${docLoginErr?`<div class="err">${docLoginErr}</div>`:""}
+    <div class="nav2"><button class="btn ghost" onclick="pickLoginDoctor(null)">Back</button><button class="btn" onclick="doctorSignIn()">Sign in</button></div>`
+    :`<p class="sub">Choose your name. If you have an approved password, you will be asked for it.</p>
+    <div style="margin-top:16px">${doctors.map(d=>`
+      <button class="pick" onclick="pickLoginDoctor(${d.id})">
+        <span class="ava">${portrait(d.id)}</span>
+        <span><b>${d.name}</b><br><span style="color:var(--muted);font-size:.88rem">${spec(d.spec).name}</span></span></button>`).join("")}</div>`}
+  </div></div>`;
+}
+function canFinish(a){return a.date<=iso(today)}
+function docActions(a){
+  if(askCancelId===a.id)return cancelUI(a);
+  const b=(label,st,cls)=>`<button class="btn ${cls} sm" onclick="setApptStatus('${a.id}','${st}')">${label}</button>`;
+  if(a.status==="pending")return b("Confirm","confirmed","")+cancelUI(a);
+  if(a.status==="confirmed")return (canFinish(a)?b("Completed","completed","")+b("No show","noshow","ghost"):"")+cancelUI(a);
+  return "";
+}
+function openRec(phone){recOpen=recOpen===phone?null:phone;render()}
+function addNote(phone){
+  const v=el("rnote").value.trim();if(!v)return;
+  recordFor(phone).notes.unshift({date:new Date().toISOString(),by:doc(loggedDoctor).name,text:v});
+  render();
+}
+function recPanel(phone,byDoc){
+  const r=recordFor(phone);
+  return `<div class="recpanel">
+    <label for="rchronic">Chronic conditions</label>
+    <input id="rchronic" value="${r.chronic}" placeholder="e.g. Type 2 diabetes, hypertension" oninput="recordFor('${phone}').chronic=this.value">
+    <label for="rmeds">Current medications</label>
+    <input id="rmeds" value="${r.meds}" placeholder="e.g. Metformin 500mg, Amlodipine 5mg" oninput="recordFor('${phone}').meds=this.value">
+    <label for="rnote">Add a note for this visit</label>
+    <div class="recnote"><input id="rnote" placeholder="e.g. Blood pressure stable, continue same dose" onkeydown="if(event.key==='Enter')addNote('${phone}')"><button class="btn sm" onclick="addNote('${phone}')">Add</button></div>
+    <div class="daylist">${r.notes.length?r.notes.map(n=>`
+      <div class="daycard"><div><b>${fmtDT(new Date(n.date))}</b> · ${n.by}<br><small style="color:var(--muted)">${n.text}</small></div></div>`).join(""):`<div class="empty">No notes yet.</div>`}</div>
+    <p class="sub" style="font-size:.8rem;margin-top:10px">Visible to any doctor at CarePlus treating this patient — not shown to the patient.</p>
+  </div>`;
+}
+function doctorPortal(){
+  const d=doc(loggedDoctor);
+  const t=iso(today);
+  const mine=appointments.filter(a=>a.doctor===d.id&&a.status!=="cancelled").sort((a,b)=>(a.date+a.time).localeCompare(b.date+b.time));
+  const todays=mine.filter(a=>a.date===t), upcoming=mine.filter(a=>a.date>t);
+  const row=a=>`<div class="daycard">
+      <div><b>${t12(a.time)}</b> · ${a.patient}<br><small style="color:var(--muted)">${nice(a.date)} · ${money(a.fee)}</small></div>
+      <div class="actions"><span class="st ${a.status}">${stl(a.status)}</span>
+        <button class="btn ghost sm" onclick="openRec('${a.phone}')">${recOpen===a.phone?"Hide record":"Patient record"}</button>
+        ${docActions(a)}</div>
+    </div>${recOpen===a.phone?recPanel(a.phone,d):""}`;
+  return `<div class="wrap" style="padding-top:28px">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
+      <div class="doc"><span class="ava">${portrait(d.id)}</span><div><h2 style="font-size:1.3rem">${d.name}</h2><span class="tag">${spec(d.spec).name}</span></div></div>
+      <button class="btn ghost sm" onclick="loggedDoctor=null;askCancelId=null;docPwOpen=false;go('home')">Sign out</button>
+    </div>
+    ${docPwCard(d)}
+    <div class="daylist">
+      <h3>Today · ${nice(t)}</h3>
+      ${todays.length?todays.map(row).join(""):`<div class="empty">No appointments today.</div>`}
+    </div>
+    <div class="daylist">
+      <h3>Upcoming</h3>
+      ${upcoming.length?upcoming.map(row).join(""):`<div class="empty">Nothing booked ahead yet.</div>`}
+    </div>
+  </div>`;
+}
+function findPatientByName(name){
+  name=name.trim().toLowerCase();
+  if(!name)return null;
+  return Object.keys(patientRecords).find(k=>(patientRecords[k].name||"").trim().toLowerCase()===name)||null;
+}
+function patientSignIn(){
+  const name=el("pname").value, pass=el("ppass").value;
+  const phone=findPatientByName(name);
+  if(!phone||!patientRecords[phone].pass){patLoginErr="No account found with this name. Create one below.";render();return}
+  if(patientRecords[phone].pass!==pass){patLoginErr="Wrong password. Try again.";render();return}
+  loggedPatient=phone;patRegMode=false;patLoginErr="";go("patientportal");
+}
+function patientRegister(){
+  const name=el("rname").value.trim(), phoneRaw=el("rphone").value;
+  const p1=el("rpass").value, p2=el("rpass2").value;
+  if(!name){patLoginErr="Enter your name.";render();return}
+  if(!/^\d{8,11}$/.test(phoneRaw.replace(/\D/g,""))){patLoginErr="Enter a valid Egyptian mobile number.";render();return}
+  if(p1.length<4){patLoginErr="Use at least 4 characters.";render();return}
+  if(p1!==p2){patLoginErr="Passwords do not match.";render();return}
+  const phone=normalizeEgyptPhone(phoneRaw);
+  if(findPatientByName(name)&&findPatientByName(name)!==phone){patLoginErr="This name is already registered with a different number.";render();return}
+  const r=recordFor(phone);r.pass=p1;r.name=name;
+  loggedPatient=phone;patRegMode=false;patLoginErr="";go("patientportal");
+}
+function patientLogin(){
+  return `<div class="wrap"><div class="panel lookup">
+    ${patRegMode?`
+    <h2>Create your account</h2>
+    <p class="sub">Use the same number you book with, so your appointments show up here.</p>
+    <label for="rname">Full name</label><input id="rname" autocomplete="off" placeholder="e.g. Nour Ibrahim">
+    <label for="rphone">Phone number</label>
+    <div class="phone-group"><span class="cc">🇪🇬 +20</span><input id="rphone" autocomplete="off" placeholder="1XX XXX XXXX"></div>
+    <label for="rpass">Choose a password</label><input id="rpass" type="password" autocomplete="off">
+    <label for="rpass2">Repeat password</label><input id="rpass2" type="password" autocomplete="off" onkeydown="if(event.key==='Enter')patientRegister()">
+    ${patLoginErr?`<div class="err">${patLoginErr}</div>`:""}
+    <div class="nav2"><button class="btn ghost" onclick="patRegMode=false;patLoginErr='';render()">Back to sign in</button><button class="btn" onclick="patientRegister()">Create account</button></div>`
+    :`
+    <h2>Patient login</h2>
+    <p class="sub">Sign in with your name and password to see your details.</p>
+    <label for="pname">Full name</label><input id="pname" autocomplete="off" placeholder="e.g. Nour Ibrahim">
+    <label for="ppass">Password</label><input id="ppass" type="password" autocomplete="off" onkeydown="if(event.key==='Enter')patientSignIn()">
+    ${patLoginErr?`<div class="err">${patLoginErr}</div>`:""}
+    <div class="nav2"><button class="btn ghost" onclick="patRegMode=true;patLoginErr='';render()">First time? Create account</button><button class="btn" onclick="patientSignIn()">Sign in</button></div>`}
+  </div></div>`;
+}
+function patientPortal(){
+  const r=recordFor(loggedPatient);
+  const mine=appointments.filter(a=>a.phone===loggedPatient).sort((a,b)=>(a.date+a.time).localeCompare(b.date+b.time)).reverse();
+  return `<div class="wrap" style="padding-top:28px;max-width:640px;margin-inline:auto">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
+      <div><h2>${r.name||"My account"}</h2><p class="sub">${loggedPatient}</p></div>
+      <button class="btn ghost sm" onclick="loggedPatient=null;askCancelId=null;go('home')">Sign out</button>
+    </div>
+    <div class="panel" style="margin-top:18px">
+      <h3>Medical details</h3>
+      <p class="sub" style="font-size:.85rem">Added by your doctor at CarePlus — you cannot edit these.</p>
+      <div class="rows" style="margin-top:10px">
+        <div><span>Chronic conditions</span><span>${r.chronic||"None recorded"}</span></div>
+        <div><span>Current medications</span><span>${r.meds||"None recorded"}</span></div>
+      </div>
+      <h3 style="margin-top:18px">Visit notes</h3>
+      <div class="daylist" style="margin-top:0">${r.notes.length?r.notes.map(n=>`
+        <div class="daycard"><div><b>${fmtDT(new Date(n.date))}</b> · ${n.by}<br><small style="color:var(--muted)">${n.text}</small></div></div>`).join(""):`<div class="empty">No notes yet.</div>`}</div>
+    </div>
+    <div class="daylist">
+      <h3>Your appointments</h3>
+      ${mine.length?mine.map(a=>{const d=doc(a.doctor);return `
+      <div class="daycard">
+        <div><b>${nice(a.date)} · ${t12(a.time)}</b> · ${d.name}<br><small style="color:var(--muted)">${spec(d.spec).name} · ${money(a.fee)} · ${a.id}</small></div>
+        <div class="actions"><span class="st ${a.status}">${stl(a.status)}</span>${canPatientCancel(a)?cancelUI(a,"Cancel"):""}</div>
+      </div>`}).join(""):`<div class="empty">No appointments yet.</div>`}
+    </div>
+  </div>`;
+}
+function adminView(){
+  if(!admin)return `<div class="wrap"><div class="panel" style="max-width:400px;margin:60px auto">
+    <h2>Admin sign in</h2><p class="sub">Demo login — any password works.</p>
+    <label for="ae">Email</label><input id="ae" value="admin@careplus.com">
+    <label for="ap">Password</label><input id="ap" type="password" value="demo1234">
+    <div style="margin-top:18px"><button class="btn" onclick="admin=true;render()">Sign in</button></div>
+  </div></div>`;
+  const t=iso(today);
+  const act=appointments.filter(a=>a.status!=="cancelled");
+  const todays=act.filter(a=>a.date===t);
+  const revenue=todays.filter(a=>a.status!=="noshow").reduce((s,a)=>s+a.fee,0);
+  const sorted=[...appointments].sort((a,b)=>(a.date+a.time).localeCompare(b.date+b.time));
+  function readAptFilters(){apptSearch=el("fsearch")?el("fsearch").value:apptSearch;apptDocFilter=el("fdoc")?el("fdoc").value:apptDocFilter;apptStatusFilter=el("fstatus")?el("fstatus").value:apptStatusFilter;apptDateFilter=el("fdate")?el("fdate").value:apptDateFilter}
+  const q=apptSearch.trim().toLowerCase();
+  const filtered=sorted.filter(a=>{
+    const qDigits=q.replace(/\D/g,"");
+    if(q&&!(a.patient.toLowerCase().includes(q)||(qDigits&&a.phone.replace(/\D/g,"").includes(qDigits))||a.id.toLowerCase().includes(q)))return false;
+    if(apptDocFilter!=="all"&&a.doctor!==Number(apptDocFilter))return false;
+    if(apptStatusFilter!=="all"&&a.status!==apptStatusFilter)return false;
+    if(apptDateFilter&&a.date!==apptDateFilter)return false;
+    return true;
+  });
+  return `<div class="wrap" style="padding-top:28px">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
+      <div><h2>Admin</h2><p class="sub">${new Date().toLocaleDateString("en-GB",{weekday:"long",day:"numeric",month:"long"})}</p></div>
+      <div class="actions">
+        ${resetAsk?`<span style="font-size:.85rem">Erase all changes and restore the sample data?</span>
+          <button class="btn danger sm" onclick="resetDemo()">Yes, reset</button>
+          <button class="btn ghost sm" onclick="resetAsk=false;render()">Keep</button>`
+        :`<button class="btn ghost sm" onclick="resetAsk=true;render()">Reset demo data</button>`}
+        <button class="btn ghost sm" onclick="admin=false;resetAsk=false;render()">Sign out</button>
+      </div>
+    </div>
+    <p class="sub" style="font-size:.82rem;margin-top:6px">${storageOk?"Everything is saved automatically in this browser.":"Saving is not available in this browser — changes will be lost when you close the page."}</p>
+    <div class="atabs">
+      <button class="${adminTab==="dashboard"?"on":""}" onclick="adminTab='dashboard';render()">Dashboard</button>
+      <button class="${adminTab==="doctors"?"on":""}" onclick="adminTab='doctors';docForm=null;render()">Doctors${doctors.filter(d=>d.pendingPass).length?` (${doctors.filter(d=>d.pendingPass).length})`:""}</button>
+      <button class="${adminTab==="calendar"?"on":""}" onclick="adminTab='calendar';render()">Calendar</button>
+      <button class="${adminTab==="specialties"?"on":""}" onclick="adminTab='specialties';specForm=null;render()">Specialties</button>
+      <button class="${adminTab==="patients"?"on":""}" onclick="adminTab='patients';patAskReset=null;render()">Patients</button>
+    </div>
+    ${adminTab==="doctors"?doctorsTab():adminTab==="calendar"?calendarTab():adminTab==="specialties"?specialtiesTab():adminTab==="patients"?patientsTab():`
+    <div class="kpis">
+      <div class="kpi"><span>Today's appointments</span><b>${todays.length}</b></div>
+      <div class="kpi"><span>Upcoming</span><b>${act.filter(a=>a.date>t).length}</b></div>
+      <div class="kpi"><span>Total appointments</span><b>${appointments.length}</b></div>
+      <div class="kpi"><span>Today's revenue</span><b>${revenue}<span style="font-size:.9rem"> EGP</span></b></div>
+    </div>
+    <div class="filterbar">
+      <input id="fsearch" type="text" value="${apptSearch}" placeholder="Search patient name, phone or ID" oninput="readAptFilters();render()">
+      <select id="fdoc" onchange="readAptFilters();render()">
+        <option value="all" ${apptDocFilter==="all"?"selected":""}>All doctors</option>
+        ${doctors.map(d=>`<option value="${d.id}" ${apptDocFilter==String(d.id)?"selected":""}>${d.name}</option>`).join("")}
+      </select>
+      <select id="fstatus" onchange="readAptFilters();render()">
+        <option value="all" ${apptStatusFilter==="all"?"selected":""}>All statuses</option>
+        ${["pending","confirmed","completed","noshow","cancelled"].map(st=>`<option value="${st}" ${apptStatusFilter===st?"selected":""}>${stl(st)}</option>`).join("")}
+      </select>
+      <input id="fdate" type="date" value="${apptDateFilter}" onchange="readAptFilters();render()">
+      ${(apptSearch||apptDocFilter!=="all"||apptStatusFilter!=="all"||apptDateFilter)?`<button class="btn ghost sm" onclick="apptSearch='';apptDocFilter='all';apptStatusFilter='all';apptDateFilter='';render()">Clear filters</button>`:""}
+      <span class="sub" style="font-size:.82rem">${filtered.length} of ${sorted.length}</span>
+    </div>
+    <div class="tablewrap">
+      <table><thead><tr><th>ID</th><th>Patient</th><th>Doctor</th><th>Specialty</th><th>Date</th><th>Time</th><th>Fee</th><th>Status</th><th>Actions</th></tr></thead>
+      <tbody>${filtered.length?filtered.map(a=>{const d=doc(a.doctor);return `<tr>
+        <td>${a.id}</td><td>${a.patient}<br><small style="color:var(--muted)">${a.phone}</small></td>
+        <td>${d.name}</td><td>${spec(d.spec).name}</td><td>${nice(a.date)}</td><td>${t12(a.time)}</td><td>${money(a.fee)}</td>
+        <td><span class="st ${a.status}">${stl(a.status)}</span></td>
+        <td>${a.status==="pending"?`<button class="btn sm" onclick="setStatus('${a.id}','confirmed')">Confirm</button> `:""}
+        ${(a.status==="pending"||a.status==="confirmed")?`<button class="btn ghost sm" onclick="openReschedule('${a.id}')">Reschedule</button> <button class="btn ghost sm" onclick="setStatus('${a.id}','cancelled')">Cancel</button>`:"—"}</td>
+      </tr>`}).join(""):`<tr><td colspan="9"><div class="empty">No appointments match these filters.</div></td></tr>`}</tbody></table>
+    </div>
+    ${rescheduleId?reschedulePanel():""}
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-top:34px">
+      <h2>Notifications</h2>
+      <div style="display:flex;align-items:center;gap:8px;font-size:.88rem;color:var(--muted)">
+        Reminder lead time:
+        <button class="btn ${REMINDER_HOURS.val===4?"":"ghost"} sm" onclick="setLead(4)">4h</button>
+        <button class="btn ${REMINDER_HOURS.val===5?"":"ghost"} sm" onclick="setLead(5)">5h</button>
+      </div>
+    </div>
+    <div class="tablewrap">
+      <table><thead><tr><th>Appointment</th><th>Type</th><th>Recipient</th><th>Status</th><th>Scheduled for</th><th>Sent at</th></tr></thead>
+      <tbody>${notifications.length?[...notifications].reverse().map(n=>`<tr>
+        <td>${n.apptId}</td><td>${n.type}</td><td>${n.recipient}</td>
+        <td><span class="st ${n.status==="sent"?"confirmed":n.status==="scheduled"?"pending":"cancelled"}">${n.status}</span></td>
+        <td>${fmtDT(n.scheduledAt)}</td><td>${fmtDT(n.sentAt)}</td>
+      </tr>`).join(""):`<tr><td colspan="6"><div class="empty">No notifications yet.</div></td></tr>`}</tbody></table>
+    </div>
+    <div class="note">Confirmation is sent for real over WhatsApp when the patient (or you, testing) taps the send button. The reminder here is only logged with its scheduled time — actually firing it automatically needs a real backend and WhatsApp Business API, which comes in the full build.</div>`}
+  </div>`;
+}
+function openReschedule(id){rescheduleId=id;const a=appointments.find(x=>x.id===id);rescheduleDate=a.date;rescheduleTime=null;rescheduleErr="";render();setTimeout(()=>{const e=el("reschedpanel");if(e)e.scrollIntoView({block:"nearest"})},0)}
+function closeReschedule(){rescheduleId=null;rescheduleErr="";render()}
+function pickRescheduleDate(ds){rescheduleDate=ds;rescheduleTime=null;render()}
+function pickRescheduleTime(t){rescheduleTime=t;render()}
+function saveReschedule(){
+  const a=appointments.find(x=>x.id===rescheduleId);if(!a)return;
+  if(!rescheduleTime){rescheduleErr="Pick a time slot.";render();return}
+  const clash=appointments.some(x=>x.id!==a.id&&x.doctor===a.doctor&&x.date===rescheduleDate&&x.time===rescheduleTime&&x.status!=="cancelled");
+  if(clash){rescheduleErr="That slot was just taken. Pick another.";render();return}
+  a.date=rescheduleDate;a.time=rescheduleTime;
+  removeReminder(a.id);
+  if(a.status==="pending"||a.status==="confirmed")addReminder(a);
+  rescheduleId=null;rescheduleErr="";render();
+}
+function reschedulePanel(){
+  const a=appointments.find(x=>x.id===rescheduleId);if(!a)return"";
+  const d=doc(a.doctor);
+  const dates=datesFor(d);
+  if(!dates.includes(rescheduleDate))dates.unshift(a.date);
+  const list=slotsFor(d,rescheduleDate).filter(sl=>!(sl.taken&&!(a.date===rescheduleDate&&a.time===sl.time)));
+  return `<div id="reschedpanel" class="panel" style="margin-top:18px">
+    <h3>Reschedule ${a.id}</h3>
+    <p class="sub">${a.patient} · ${d.name} · currently ${nice(a.date)} at ${t12(a.time)}</p>
+    <div class="dates" style="margin-top:14px">${dates.map(ds=>`
+      <button class="date ${rescheduleDate===ds?"sel":""}" onclick="pickRescheduleDate('${ds}')">
+        <small>${nice(ds).split(" ")[0]}</small><b>${new Date(ds+"T00:00:00").getDate()}</b><small>${nice(ds).split(" ")[2]}</small></button>`).join("")}</div>
+    <div class="slots" style="margin-top:14px">${list.map(sl=>`
+      <button class="slot ${rescheduleTime===sl.time?"sel":""}" ${sl.taken?"disabled":""} onclick="pickRescheduleTime('${sl.time}')">${t12(sl.time)}${sl.taken?"<br><small>Booked</small>":""}</button>`).join("")}</div>
+    ${rescheduleErr?`<div class="err">${rescheduleErr}</div>`:""}
+    <div class="nav2"><button class="btn ghost" onclick="closeReschedule()">Cancel</button><button class="btn" onclick="saveReschedule()">Save new time</button></div>
+  </div>`;
+}
+function setApptStatus(id,st){
+  const a=appointments.find(x=>x.id===id);if(!a)return;
+  a.status=st;
+  if(st==="cancelled"||st==="completed"||st==="noshow"){
+    notifications.forEach(n=>{if(n.apptId===id&&n.type==="Appointment reminder"&&n.status==="scheduled")n.status="cancelled"});
+  }
+  render();
+}
+function setStatus(id,st){setApptStatus(id,st)}
+function setLead(h){REMINDER_HOURS.val=h;notifications.forEach(n=>{if(n.type==="Appointment reminder"){const a=appointments.find(x=>x.id===n.apptId);if(a&&(a.status==="pending"||a.status==="confirmed")&&n.status!=="sent"){const r=reminderTime(a);n.scheduledAt=r;n.status=r<new Date()?"skipped (past)":"scheduled"}}});render()}
+
+const DAY_LABELS=["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+const dayLabels=()=>{
+  if(LANG!=="ar")return DAY_LABELS;
+  const ref=new Date(2023,0,1); // a Sunday
+  return [0,1,2,3,4,5,6].map(i=>{const d=new Date(ref);d.setDate(ref.getDate()+i);return d.toLocaleDateString("ar-EG",{weekday:"short"})});
+}
+function blankDocForm(){return {id:null,name:"",spec:specialties[0].id,fee:300,exp:1,bio:"",days:[],start:"10:00",end:"18:00",slot:30,breakStart:"",breakEnd:"",active:true}}
+function openDocForm(id){docErrs={};docForm=id?Object.assign({},doc(id),{breakStart:doc(id).breakStart||"",breakEnd:doc(id).breakEnd||""}):blankDocForm();render()}
+function closeDocForm(){docForm=null;render()}
+function toggleDay(n){readDocForm();const i=docForm.days.indexOf(n);i>-1?docForm.days.splice(i,1):docForm.days.push(n);render()}
+function readDocForm(){docForm.name=el("dname").value;docForm.spec=Number(el("dspec").value);docForm.fee=Number(el("dfee").value);
+  docForm.exp=Number(el("dexp").value);docForm.bio=el("dbio").value;docForm.start=el("dstart").value;docForm.end=el("dend").value;
+  docForm.slot=Number(el("dslot").value);docForm.breakStart=el("dbstart").value;docForm.breakEnd=el("dbend").value}
+function saveDocForm(){
+  readDocForm();docErrs={};
+  if(!docForm.name.trim())docErrs.name="Enter the doctor's name.";
+  if(!docForm.days.length)docErrs.days="Pick at least one working day.";
+  if(docForm.start>=docForm.end)docErrs.hours="End time must be after start time.";
+  if(Object.keys(docErrs).length){render();return}
+  const rec={id:docForm.id||Math.max(0,...doctors.map(d=>d.id))+1,name:docForm.name.trim(),spec:docForm.spec,exp:docForm.exp,fee:docForm.fee,
+    bio:docForm.bio.trim()||"Experienced CarePlus specialist.",days:docForm.days.slice(),start:docForm.start,end:docForm.end,slot:docForm.slot,
+    breakStart:docForm.breakStart||null,breakEnd:docForm.breakEnd||null,active:docForm.active,pass:docForm.pass||""};
+  const i=doctors.findIndex(d=>d.id===rec.id);
+  if(i>-1)doctors[i]=rec;else doctors.push(rec);
+  docForm=null;render();
+}
+function toggleDocActive(id){const d=doc(id);d.active=!d.active;render()}
+function openPw(id){pwEdit=id;pwErr="";render();setTimeout(()=>{const e=el("npw");if(e)e.focus()},0)}
+function closePw(){pwEdit=null;pwErr="";render()}
+function savePw(){
+  const v=el("npw").value.trim();
+  if(v.length<4){pwErr="Use at least 4 characters.";render();return}
+  doc(pwEdit).pass=v;doc(pwEdit).pendingPass="";pwEdit=null;pwErr="";render();
+}
+function approvePw(id){const d=doc(id);d.pass=d.pendingPass;d.pendingPass="";render()}
+function rejectPw(id){doc(id).pendingPass="";render()}
+function approvalPanel(d){
+  return `<div class="pwpanel">
+    <span style="flex:1;min-width:200px;font-size:.9rem">${d.name} asked to ${d.pass?"change their":"create a"} login password.</span>
+    <button class="btn sm" onclick="approvePw(${d.id})">Approve</button>
+    <button class="btn ghost sm" onclick="rejectPw(${d.id})">Reject</button>
+  </div>`;
+}
+function pwPanel(d){
+  return `<div class="pwpanel">
+    <label for="npw">New login password for ${d.name}</label>
+    <input id="npw" type="text" autocomplete="off" placeholder="At least 4 characters" onkeydown="if(event.key==='Enter')savePw()">
+    <button class="btn sm" onclick="savePw()">Save</button>
+    <button class="btn ghost sm" onclick="closePw()">Cancel</button>
+    ${pwErr?`<div class="err" style="width:100%">${pwErr}</div>`:""}
+  </div>`;
+}
+function doctorsTab(){
+  if(docForm)return docFormPanel();
+  return `<div style="display:flex;justify-content:space-between;align-items:center;margin-top:18px">
+      <p class="sub" style="margin:0">${doctors.length} doctor${doctors.length===1?"":"s"} — inactive ones stay out of new bookings.</p>
+      <button class="btn sm" onclick="openDocForm(null)">+ Add doctor</button>
+    </div>
+    ${doctors.map(d=>`
+    <div class="docrow ${d.active?"":"off"}">
+      <span class="ava">${portrait(d.id)}</span>
+      <div class="meta"><b>${d.name}</b> <span class="tag">${spec(d.spec).name}</span><br>
+        <small>${money(d.fee)} · ${d.days.map(x=>dayLabels()[x]).join(" ")} · ${t12(d.start)}–${t12(d.end)}${d.active?"":" · Inactive"}<br>${d.pass?"Login password set":"No login password"}${d.pendingPass?" · request waiting for approval":""}</small></div>
+      <button class="btn ghost sm" onclick="openPw(${d.id})">${d.pass?"Change password":"Set password"}</button>
+      <button class="btn ghost sm" onclick="openDocForm(${d.id})">Edit</button>
+      <button class="btn ${d.active?"ghost":""} sm" onclick="toggleDocActive(${d.id})">${d.active?"Deactivate":"Activate"}</button>
+    </div>${pwEdit===d.id?pwPanel(d):(d.pendingPass?approvalPanel(d):"")}`).join("")}`;
+}
+function docFormPanel(){
+  const f=docForm;
+  return `<div class="panel" style="margin-top:18px">
+    <h3>${f.id?"Edit doctor":"Add doctor"}</h3>
+    <div class="formgrid">
+      <div><label for="dname">Full name</label><input id="dname" value="${f.name}" placeholder="Dr. Sara Adel" oninput="docForm.name=this.value">
+        ${docErrs.name?`<div class="err">${docErrs.name}</div>`:""}</div>
+      <div><label for="dspec">Specialty</label><select id="dspec" onchange="docForm.spec=Number(this.value)">
+        ${specialties.filter(s=>s.active||s.id===f.spec).map(s=>`<option value="${s.id}" ${f.spec===s.id?"selected":""}>${s.name}</option>`).join("")}</select></div>
+      <div><label for="dfee">Consultation fee (EGP)</label><input id="dfee" type="number" min="0" value="${f.fee}"></div>
+      <div><label for="dexp">Years of experience</label><input id="dexp" type="number" min="0" value="${f.exp}"></div>
+      <div class="full"><label for="dbio">Short bio</label><input id="dbio" value="${f.bio}" placeholder="One line about the doctor"></div>
+      <div><label for="dstart">Working hours from</label><input id="dstart" type="time" value="${f.start}"></div>
+      <div><label for="dend">to</label><input id="dend" type="time" value="${f.end}">${docErrs.hours?`<div class="err">${docErrs.hours}</div>`:""}</div>
+      <div><label for="dbstart">Break from (optional)</label><input id="dbstart" type="time" value="${f.breakStart||""}"></div>
+      <div><label for="dbend">Break to</label><input id="dbend" type="time" value="${f.breakEnd||""}"></div>
+      <div><label for="dslot">Slot duration</label><select id="dslot">
+        ${[15,20,30,45,60].map(m=>`<option value="${m}" ${f.slot===m?"selected":""}>${m} minutes</option>`).join("")}</select></div>
+      <div class="full"><label>Working days</label>
+        <div class="days">${dayLabels().map((l,i)=>`<button type="button" class="daychip ${f.days.includes(i)?"on":""}" onclick="toggleDay(${i})">${l}</button>`).join("")}</div>
+        ${docErrs.days?`<div class="err">${docErrs.days}</div>`:""}</div>
+    </div>
+    <div class="nav2"><button class="btn ghost" onclick="closeDocForm()">Cancel</button><button class="btn" onclick="saveDocForm()">Save doctor</button></div>
+  </div>`;
+}
+
+function askPatReset(phone){patAskReset=phone;render()}
+function cancelPatReset(){patAskReset=null;render()}
+function resetPatPassword(phone){patientRecords[phone].pass="";patAskReset=null;render()}
+function patientsTab(){
+  const regs=Object.keys(patientRecords).filter(ph=>patientRecords[ph].pass).sort((a,b)=>(patientRecords[a].name||"").localeCompare(patientRecords[b].name||""));
+  if(!regs.length)return `<div class="empty" style="margin-top:18px">No patients have created an account yet.</div>`;
+  return `<p class="sub" style="margin-top:18px">${regs.length} patient account${regs.length===1?"":"s"} registered via Patient login.</p>
+    ${regs.map(ph=>{const r=patientRecords[ph];
+      const apptCount=appointments.filter(a=>a.phone===ph).length;
+      return `<div class="docrow">
+        <div class="meta"><b>${r.name}</b><br><small>${ph} · ${apptCount} appointment${apptCount===1?"":"s"}${r.chronic?` · ${r.chronic}`:""}</small></div>
+        ${patAskReset===ph
+          ?`<span style="font-size:.85rem">Reset this patient's password?</span>
+            <button class="btn danger sm" onclick="resetPatPassword('${ph}')">Yes, reset</button>
+            <button class="btn ghost sm" onclick="cancelPatReset()">Cancel</button>`
+          :`<button class="btn ghost sm" onclick="askPatReset('${ph}')">Reset password</button>`}
+      </div>`}).join("")}
+    <p class="sub" style="font-size:.82rem;margin-top:10px">Resetting clears their password — the patient can set a new one from Patient login using the same name and phone number.</p>`;
+}
+function blankSpecForm(){return {id:null,name:"",desc:"",active:true}}
+function openSpecForm(id){specErrs={};specForm=id?Object.assign({},specialties.find(x=>x.id===id)):blankSpecForm();render()}
+function closeSpecForm(){specForm=null;render()}
+function saveSpecForm(){
+  specForm.name=el("spname").value;specForm.desc=el("spdesc").value;
+  specErrs={};
+  if(!specForm.name.trim())specErrs.name="Enter a specialty name.";
+  if(Object.keys(specErrs).length){render();return}
+  const rec={id:specForm.id||Math.max(0,...specialties.map(s=>s.id))+1,name:specForm.name.trim(),
+    desc:specForm.desc.trim()||"Care from a CarePlus specialist.",icon:specForm.icon||"",active:specForm.active};
+  const i=specialties.findIndex(s=>s.id===rec.id);
+  if(i>-1)specialties[i]=rec;else specialties.push(rec);
+  specForm=null;render();
+}
+function toggleSpecActive(id){const s=specialties.find(x=>x.id===id);s.active=!s.active;render()}
+function specialtiesTab(){
+  if(specForm)return specFormPanel();
+  return `<div style="display:flex;justify-content:space-between;align-items:center;margin-top:18px">
+      <p class="sub" style="margin:0">${specialties.length} specialt${specialties.length===1?"y":"ies"} — inactive ones stay out of new bookings.</p>
+      <button class="btn sm" onclick="openSpecForm(null)">+ Add specialty</button>
+    </div>
+    ${specialties.map(s=>`
+    <div class="docrow ${s.active?"":"off"}">
+      <span class="ava" style="background:var(--mint);color:var(--teal-d);display:grid;place-items:center;padding:10px">${specIcon(s.id)}</span>
+      <div class="meta"><b>${s.name}</b><br><small>${s.desc}${s.active?"":" · Inactive"}</small></div>
+      <button class="btn ghost sm" onclick="openSpecForm(${s.id})">Edit</button>
+      <button class="btn ${s.active?"ghost":""} sm" onclick="toggleSpecActive(${s.id})">${s.active?"Deactivate":"Activate"}</button>
+    </div>`).join("")}`;
+}
+function specFormPanel(){
+  const f=specForm;
+  return `<div class="panel" style="margin-top:18px">
+    <h3>${f.id?"Edit specialty":"Add specialty"}</h3>
+    <label for="spname">Name</label><input id="spname" value="${f.name}" placeholder="e.g. Orthopedics">
+    ${specErrs.name?`<div class="err">${specErrs.name}</div>`:""}
+    <label for="spdesc">Short description</label><input id="spdesc" value="${f.desc}" placeholder="One line shown on the specialty card">
+    <div class="nav2"><button class="btn ghost" onclick="closeSpecForm()">Cancel</button><button class="btn" onclick="saveSpecForm()">Save specialty</button></div>
+  </div>`;
+}
+function prevMonth(){calMonth=new Date(calMonth.getFullYear(),calMonth.getMonth()-1,1);render()}
+function nextMonth(){calMonth=new Date(calMonth.getFullYear(),calMonth.getMonth()+1,1);render()}
+function selectCalDate(ds){calSelected=ds;render()}
+function calendarTab(){
+  const y=calMonth.getFullYear(),m=calMonth.getMonth();
+  const first=new Date(y,m,1), startDow=first.getDay(), days=new Date(y,m+1,0).getDate();
+  const act=appointments.filter(a=>a.status!=="cancelled");
+  const countFor=ds=>act.filter(a=>a.date===ds).length;
+  const cells=[];
+  for(let i=0;i<startDow;i++)cells.push(null);
+  for(let d=1;d<=days;d++)cells.push(d);
+  const monthLabel=calMonth.toLocaleDateString(locale(),{month:"long",year:"numeric"});
+  const dayAppts=act.filter(a=>a.date===calSelected).sort((a,b)=>a.time.localeCompare(b.time));
+  return `
+    <div class="calhead">
+      <button class="btn ghost sm" onclick="prevMonth()">← Prev</button>
+      <h3>${monthLabel}</h3>
+      <button class="btn ghost sm" onclick="nextMonth()">Next →</button>
+    </div>
+    <div class="calgrid">
+      ${dayLabels().map(l=>`<div class="dow">${l}</div>`).join("")}
+      ${cells.map(d=>{
+        if(!d)return `<div class="calcell pad"></div>`;
+        const ds=iso(new Date(y,m,d)), c=countFor(ds), isToday=ds===iso(today), isSel=ds===calSelected;
+        return `<button class="calcell ${isToday?"today":""} ${isSel?"sel":""}" onclick="selectCalDate('${ds}')">
+          <span class="dnum">${d}</span>${c?`<span class="badge">${c}</span>`:""}</button>`;
+      }).join("")}
+    </div>
+    <div class="daylist">
+      <h3>${nice(calSelected)}</h3>
+      ${dayAppts.length?dayAppts.map(a=>{const d=doc(a.doctor);return `
+        <div class="daycard">
+          <div><b>${t12(a.time)}</b> · ${a.patient}<br><small style="color:var(--muted)">${d.name} · ${spec(d.spec).name}</small></div>
+          <span class="st ${a.status}">${stl(a.status)}</span>
+        </div>`}).join(""):`<div class="empty">No appointments on this day.</div>`}
+    </div>`;
+}
+
+document.getElementById("logo").innerHTML=LOGO;
+function toggleLang(){LANG=LANG==="en"?"ar":"en";render()}
+const STRINGS=[
+ ["Home","الرئيسية"],
+ ["Doctors","الأطباء"],
+ ["My appointment","حجزي"],
+ ["Doctor login","دخول الطبيب"],
+ ["Admin","الإدارة"],
+ ["Book appointment","احجز موعد"],
+ ["Book a doctor at CarePlus in under a minute.","احجز عند دكتور في CarePlus في أقل من دقيقة."],
+ ["Choose a specialty, pick a doctor and a free time slot, and get an appointment ID right away. No calls, no waiting on the line.","اختر التخصص، اختر الدكتور والميعاد المتاح، واحصل على رقم الحجز فورًا. من غير مكالمات ولا انتظار."],
+ ["See our doctors","تصفح أطباءنا"],
+ ["Working hours","مواعيد العمل"],
+ ["Saturday – Wednesday","السبت – الأربعاء"],
+ ["Thursday","الخميس"],
+ ["Friday","الجمعة"],
+ ["Closed","مغلق"],
+ ["Address","العنوان"],
+ ["Phone","الهاتف"],
+ ["Specialties","التخصصات"],
+ ["Three clinics running now, more opening soon.","3 تخصصات شغالة دلوقتي، والمزيد قريبًا."],
+ ["doctor available","دكتور متاح"],
+ ["Our doctors","أطباؤنا"],
+ ["Each doctor has their own days and hours, so slots differ.","لكل دكتور أيامه ومواعيده الخاصة."],
+ ["years experience","سنوات خبرة"],
+ ["Consultation ","الكشف "],
+ ["Book with ","احجز مع "],
+ ["Find us","موقعنا"],
+ ["free parking behind the building.","باركينج مجاني خلف المبنى."],
+ ["Specialty","التخصص"],
+ ["Doctor","الدكتور"],
+ ["Date","التاريخ"],
+ ["Time","الوقت"],
+ ["Your details","بياناتك"],
+ ["Review","المراجعة"],
+ ["Choose a specialty","اختر التخصص"],
+ ["Choose a doctor","اختر الدكتور"],
+ ["Choose a date","اختر التاريخ"],
+ ["Choose a time","اختر الوقت"],
+ ["No doctors in this specialty yet. Pick another one.","مفيش دكاترة في التخصص ده لسه. اختر تخصص تاني."],
+ ["-minute slots"," دقيقة لكل كشف"],
+ ["Crossed-out times are already booked. The 5:00 PM slot is taken by a registered patient in this demo.","المواعيد المشطوبة محجوزة بالفعل. ميعاد 5:00 محجوز بمريض مسجّل في هذا الديمو."],
+ ["Booked","محجوز"],
+ ["Full name","الاسم بالكامل"],
+ ["Phone / WhatsApp number","رقم الموبايل / واتساب"],
+ ["Email (optional)","البريد الإلكتروني (اختياري)"],
+ ["After you confirm, you'll get a button to send the confirmation on WhatsApp to","بعد التأكيد، هيظهرلك زرار تبعت بيه تأكيد الحجز على واتساب لـ"],
+ [" yourself."," بنفسك."],
+ ["Review your appointment","راجع حجزك"],
+ ["Patient","المريض"],
+ ["Consultation fee","سعر الكشف"],
+ ["Continue","التالي"],
+ ["Back","رجوع"],
+ ["Confirm appointment","تأكيد الحجز"],
+ ["Appointment confirmed","تم تأكيد الحجز"],
+ ["Keep this ID — you'll need it at reception.","احتفظ برقم الحجز ده — هتحتاجه عند الاستقبال."],
+ ["Fee","السعر"],
+ ["Status","الحالة"],
+ ["Confirmed","مؤكد"],
+ ["Pending","معلّق"],
+ ["Cancelled","ملغي"],
+ ["Completed","تم الكشف"],
+ ["No show","لم يحضر"],
+ ["Send confirmation on WhatsApp → ","ابعت تأكيد على واتساب → "],
+ ["Opens WhatsApp with the message ready — you press Send there. This goes to the number you just entered, not a fake one.","بيفتحلك واتساب والرسالة جاهزة — انت بس تدوس إرسال. الرسالة بتتبعت على الرقم اللي كتبته بالظبط."],
+ ["Back to home","العودة للرئيسية"],
+ ["Find your appointment","دوّر على حجزك"],
+ ["Enter the appointment ID from your WhatsApp confirmation — no account or password needed.","اكتب رقم الحجز اللي وصلك في رسالة التأكيد على واتساب — من غير حساب ولا باسورد."],
+ ["Find","دوّر"],
+ ["No appointment found with this ID. Check the confirmation message and try again.","مفيش حجز بالرقم ده. راجع رسالة التأكيد وجرب تاني."],
+ ["This appointment was cancelled. The time slot is free again for other patients.","الحجز ده اتلغى. الميعاد رجع متاح لمرضى تانيين."],
+ ["Cancel appointment","إلغاء الحجز"],
+ ["Cancel","إلغاء"],
+ ["Cancel this appointment?","تأكيد إلغاء الحجز؟"],
+ ["Yes, cancel","أيوه، ألغي"],
+ ["Keep it","سيبه"],
+ ["Pick your name to see your own schedule — no password in this demo.","اختر اسمك عشان تشوف جدولك — من غير باسورد في الديمو ده."],
+ ["Choose your name. If you have an approved password, you will be asked for it.","اختر اسمك. لو عندك باسورد معتمد، هيتطلب منك."],
+ ["Password","الباسورد"],
+ ["Sign in","دخول"],
+ ["No login password yet — anyone can open this page by picking your name.","لسه مفيش باسورد — أي حد يقدر يفتح الصفحة دي باختيار اسمك بس."],
+ ["Your login is protected by a password.","دخولك محمي بباسورد."],
+ ["Your ","باسوردك "],
+ ["new ","الجديد "],
+ ["password is waiting for admin approval.","في انتظار موافقة الإدارة."],
+ ["Your current password stays active until then.","باسوردك الحالي لسه شغال لحد ما تتم الموافقة."],
+ ["Until then, anyone can open this page by picking your name.","لحد ما تتم الموافقة، أي حد يقدر يفتح الصفحة دي باختيار اسمك."],
+ ["Send a different password","ابعت باسورد تاني"],
+ ["Change password","تغيير الباسورد"],
+ ["Create password","إنشاء باسورد"],
+ ["Create your password","اعمل باسوردك"],
+ ["The clinic admin has to approve it before it starts working.","لازم إدارة العيادة توافق قبل ما يشتغل."],
+ ["New password","باسورد جديد"],
+ ["Repeat password","أعد كتابة الباسورد"],
+ ["Use at least 4 characters.","استخدم 4 حروف على الأقل."],
+ ["The two passwords do not match.","الباسوردين مش متطابقين."],
+ ["Send for approval","ابعت للموافقة"],
+ ["Today","النهاردة"],
+ ["Upcoming","المواعيد الجاية"],
+ ["No appointments today.","مفيش مواعيد النهاردة."],
+ ["Nothing booked ahead yet.","مفيش مواعيد محجوزة قدام لسه."],
+ ["Sign out","خروج"],
+ ["Admin sign in","دخول الإدارة"],
+ ["Demo login — any password works.","دخول تجريبي — أي باسورد هيشتغل."],
+ ["Today's appointments","مواعيد النهاردة"],
+ ["Today's revenue","إيراد النهاردة"],
+ ["Total appointments","إجمالي المواعيد"],
+ ["Dashboard","الرئيسية"],
+ ["Calendar","الكالندر"],
+ ["Erase all changes and restore the sample data?","مسح كل التعديلات والرجوع للبيانات التجريبية؟"],
+ ["Yes, reset","أيوه، ارجع للأصل"],
+ ["Reset demo data","إعادة ضبط البيانات"],
+ ["Everything is saved automatically in this browser.","كل حاجة بتتحفظ تلقائيًا في المتصفح ده."],
+ ["Saving is not available in this browser — changes will be lost when you close the page.","الحفظ مش متاح في المتصفح ده — هتضيع التعديلات لو قفلت الصفحة."],
+ ["Actions","إجراءات"],
+ ["Confirm","تأكيد"],
+ ["Edit","تعديل"],
+ ["Appointment","الحجز"],
+ ["Type","النوع"],
+ ["Recipient","المستلم"],
+ ["Scheduled for","موعد الإرسال"],
+ ["Sent at","اتبعت الساعة"],
+ ["Reminder lead time:","مدة التذكير قبل الميعاد:"],
+ ["No appointments on this day.","مفيش مواعيد في اليوم ده."],
+ ["No notifications yet.","لسه مفيش إشعارات."],
+ ["Confirmation is sent for real over WhatsApp when the patient (or you, testing) taps the send button. The reminder here is only logged with its scheduled time — actually firing it automatically needs a real backend and WhatsApp Business API, which comes in the full build.","التأكيد بيتبعت فعليًا على واتساب لما المريض (أو انت وقت التجربة) يدوس زرار الإرسال. التذكير هنا مسجّل بميعاده بس — إرساله أوتوماتيك محتاج باك إند حقيقي وWhatsApp Business API في البيلد الكامل."],
+ [" doctor","دكتور"],
+ [" — inactive ones stay out of new bookings."," — المتوقف مايظهرش في الحجوزات الجديدة."],
+ ["+ Add doctor","+ إضافة دكتور"],
+ ["Inactive","متوقف"],
+ ["Login password set","الباسورد متظبط"],
+ ["No login password","مفيش باسورد"],
+ [" · request waiting for approval"," · طلب في انتظار الموافقة"],
+ ["Deactivate","إيقاف"],
+ ["Activate","تفعيل"],
+ ["Add doctor","إضافة دكتور"],
+ ["Edit doctor","تعديل بيانات دكتور"],
+ ["Short bio","نبذة قصيرة"],
+ ["Consultation fee (EGP)","سعر الكشف (جنيه)"],
+ ["Years of experience","سنوات الخبرة"],
+ ["Working hours from","الشغل من"],
+ [" to"," إلى"],
+ ["Break from (optional)","بريك من (اختياري)"],
+ ["Break to","إلى"],
+ ["Slot duration","مدة الكشف"],
+ [" minutes"," دقيقة"],
+ ["Working days","أيام الشغل"],
+ ["Save doctor","حفظ بيانات الدكتور"],
+ ["Approve","موافقة"],
+ ["Reject","رفض"],
+ [" asked to "," طلب "],
+ ["change their","تغيير"],
+ ["create a","إنشاء"],
+ ["login password.","باسورد الدخول."],
+ ["Prev","السابق"],
+ ["Next","التالي"],
+ ["Patient record","ملف المريض"],
+ ["Hide record","إخفاء الملف"],
+ ["Chronic conditions","الأمراض المزمنة"],
+ ["Current medications","الأدوية الحالية"],
+ ["Add a note for this visit","أضف ملاحظة لهذه الزيارة"],
+ ["Add","إضافة"],
+ ["No notes yet.","لسه مفيش ملاحظات."],
+ ["Visible to any doctor at CarePlus treating this patient — not shown to the patient.","ظاهر لأي دكتور في CarePlus بيعالج المريض ده — مش ظاهر للمريض."],
+ ["Patient login","دخول المريض"],
+ ["Create your account","اعمل حسابك"],
+ ["Use the same number you book with, so your appointments show up here.","استخدم نفس الرقم اللي بتحجز بيه عشان مواعيدك تظهر هنا."],
+ ["Choose a password","اختار باسورد"],
+ ["Create account","إنشاء حساب"],
+ ["Back to sign in","رجوع لتسجيل الدخول"],
+ ["Sign in with your name and password to see your details.","سجّل دخولك بالاسم والباسورد عشان تشوف بياناتك."],
+ ["First time? Create account","أول مرة؟ اعمل حساب"],
+ ["No account found with this name. Create one below.","مفيش حساب بالاسم ده. اعمل واحد تحت."],
+ ["Wrong password. Try again.","باسورد غلط. جرب تاني."],
+ ["Enter your name.","اكتب اسمك."],
+ ["Enter a valid Egyptian mobile number.","اكتب رقم موبايل مصري صحيح."],
+ ["This name is already registered with a different number.","الاسم ده متسجل برقم تاني."],
+ ["My account","حسابي"],
+ ["Medical details","البيانات الطبية"],
+ ["Added by your doctor at CarePlus — you cannot edit these.","بيانات بيضيفها دكتورك في CarePlus — مش قادر تعدّلها."],
+ ["None recorded","مفيش مسجل"],
+ ["Visit notes","ملاحظات الزيارات"],
+ ["Your appointments","مواعيدك"],
+ ["No appointments yet.","مفيش مواعيد لسه."],
+ ["Search patient name, phone or ID","دوّر باسم المريض أو رقمه أو رقم الحجز"],
+ ["All doctors","كل الدكاترة"],
+ ["All statuses","كل الحالات"],
+ ["Clear filters","مسح الفلاتر"],
+ ["No appointments match these filters.","مفيش مواعيد مطابقة للفلتر ده."],
+ ["+ Add specialty","+ إضافة تخصص"],
+ ["Add specialty","إضافة تخصص"],
+ ["Edit specialty","تعديل تخصص"],
+ ["Short description","وصف قصير"],
+ ["Save specialty","حفظ التخصص"],
+ ["Enter a specialty name.","اكتب اسم التخصص."],
+ ["Care from a CarePlus specialist.","رعاية من متخصص في CarePlus."],
+ ["Reschedule","تغيير الميعاد"],
+ ["currently","حاليًا"],
+ ["Pick a time slot.","اختر ميعاد."],
+ ["That slot was just taken. Pick another.","الميعاد ده اتحجز لتوه. اختر ميعاد تاني."],
+ ["Save new time","حفظ الميعاد الجديد"],
+ ["Patients","المرضى"],
+ ["No patients have created an account yet.","لسه مفيش مرضى عملوا حساب."],
+ ["patient account","حساب مريض"],
+ ["registered via Patient login.","مسجّلين عن طريق دخول المريض."],
+ ["Reset this patient\'s password?","تصفير باسورد المريض ده؟"],
+ ["Yes, reset","أيوه، صفّر"],
+ ["Reset password","تصفير الباسورد"],
+ ["Resetting clears their password — the patient can set a new one from Patient login using the same name and phone number.","التصفير بيمسح الباسورد — المريض يقدر يعمل باسورد جديد من دخول المريض بنفس الاسم والرقم."],
+ ["At least 4 characters","4 حروف على الأقل على الأقل"]
+].sort((a,b)=>b[0].length-a[0].length);
+function esc(x){return x.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")}
+const STRINGS_RE=STRINGS.map(([en,ar])=>[new RegExp(esc(en),"g"),ar]);
+function translate(html){if(LANG!=="ar")return html;let out=html;STRINGS_RE.forEach(([re,ar])=>out=out.replace(re,ar));return out}
+const CHROME_AR={
+  "nv-home":"الرئيسية","nv-doctors":"الأطباء","nv-lookup":"حجزي","nv-doclogin":"دخول الطبيب",
+  "nv-admin":"الإدارة","nv-patlogin":"دخول المريض","nv-book":"احجز موعد","nv-lang":"English",
+  "nv-footaddr":"CarePlus Medical Clinic · 12 شارع النيل، المعادي، القاهرة · +20 100 123 4567",
+  "nv-footnote":"معاينة تجريبية — بيانات وهمية بس"
+};
+const CHROME_EN={
+  "nv-home":"Home","nv-doctors":"Doctors","nv-lookup":"My appointment","nv-doclogin":"Doctor login",
+  "nv-admin":"Admin","nv-patlogin":"Patient login","nv-book":"Book appointment","nv-lang":"العربية",
+  "nv-footaddr":"CarePlus Medical Clinic · 12 Nile Street, Maadi, Cairo · +20 100 123 4567",
+  "nv-footnote":"Demo preview — sample data only"
+};
+function updateChrome(){
+  document.documentElement.setAttribute("dir",LANG==="ar"?"rtl":"ltr");
+  document.documentElement.setAttribute("lang",LANG==="ar"?"ar":"en");
+  const map=LANG==="ar"?CHROME_AR:CHROME_EN;
+  Object.keys(map).forEach(id=>{const e=el(id);if(e)e.textContent=map[id]});
+}
+function render(){
+  const html = view==="home"?home():view==="doctors"?doctorsPage():view==="book"?book():view==="done"?done():view==="lookup"?lookup():view==="doclogin"?doctorLogin():view==="docportal"?(loggedDoctor?doctorPortal():doctorLogin()):view==="patientlogin"?patientLogin():view==="patientportal"?(loggedPatient?patientPortal():patientLogin()):adminView();
+  el("app").innerHTML = translate(html);
+  updateChrome();
+  saveState();
+}
+render();
+</script>
+</body>
+</html>
